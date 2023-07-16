@@ -1,0 +1,153 @@
+.home{
+        background-color:#434141;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        // align-items: stretch;
+        color: white;
+        width: 100%;
+
+
+        .navbar{
+            flex: 1.5;
+            top: 0;
+            color: white;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+
+            .logo{
+                .brand{
+                    font-weight: bold;
+                    font-size: 20px;
+                    margin-right: 100px;
+                }
+            }
+
+
+            .searchbar{
+                input{
+                    width: 15rem;
+                    outline: none;
+                    border: none;
+                    padding: 10px;
+                    border-radius: 10px;
+                }
+            }
+
+            .user{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                img{
+                    height: 40px;
+                    width: 40px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                    margin-left: 10px;
+                }
+                .userinfo{
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: right;
+
+                    .role{
+                        font-size: 10px;
+                        color: rgb(209, 194, 194);
+                    }
+                    .name{
+                        font-size: 18px;
+                    }
+                    span{
+                        margin-right: 10px;
+                    }
+                }
+            }
+        }
+
+        .box{
+            flex: 15;
+            background-color: #181717;
+            display: flex;
+
+            .sidenavbar{
+                flex: 1;
+                background-color: #434141;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                align-items: center;
+
+                .icon{
+                    cursor: pointer;
+                    font-size: 20px;
+                    padding: 10px;
+                    margin: 5px 15px;
+                }
+
+            }
+
+            .content{
+                flex: 25;
+
+                .topsection{
+                    margin: 10px 20px;
+
+                }
+
+                .middlesection{
+                    margin: 10px 20px;
+                    margin-top: 30px;
+                    display: grid;
+                    grid-template-rows: 1fr; /* Sets one column */
+                    grid-template-columns: repeat(3, 1fr); /* Sets three rows */
+                    gap: 10px; /* Optional: adds some spacing between the divs */
+
+
+                    .stats{
+                        background-color: #434141;
+                        padding: 10px 20px;
+                        height: 100px;
+                        border-radius: 10px;
+                    }
+                }
+
+                .bottomsection{
+                    margin: 10px 20px;
+                    margin-top: 30px;
+                    display: grid;
+                    grid-template-rows: 1fr; /* Sets one column */
+                    grid-template-columns: repeat(2, 1fr); /* Sets three rows */
+                    gap: 10px; /* Optional: adds some spacing between the divs */
+
+                    .table{
+                        .button{
+                            display: flex;
+                            justify-content: space-between;
+                        }
+                        
+                        .user{
+                            display: flex;
+                            align-items: center;
+                            span{
+                                margin-left: 5px;
+                            }
+                            img{
+                                height: 16px;
+                                width: 16px;
+                                object-fit: cover;
+                                border-radius: 50%;
+                            }
+                        }
+
+                        
+                    }
+
+                }
+
+            }
+        }
+}

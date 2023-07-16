@@ -1,0 +1,162 @@
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px  ;
+
+    input{
+        padding: 10px;
+        border: none;
+        outline: none;
+        width: 300px;
+        border-bottom: 2px solid #128C7E;
+        background: transparent;
+        font-size: 15px ;
+        color: rgb(171, 159, 159);
+    }
+
+    button{
+        background-color: #128C7E;
+        color: white;
+        padding: 10px;
+        font-weight: bold;
+        font-size: 20px;
+        border: none;
+        cursor: pointer;
+        border-radius: 10px;
+    }
+
+    label{
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 12px;
+        color: #128C7E;
+        cursor: pointer;
+
+        img{
+            width: 32px;
+        }
+    }
+}
+
+
+.bookstable{
+    background-color:#434141;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    // align-items: stretch;
+    color: white;
+    width: 100%;
+
+
+    .navbar{
+        flex: 1.5;
+        top: 0;
+        color: white;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 20px;
+
+        .logo{
+            .brand{
+                font-weight: bold;
+                font-size: 20px;
+                margin-right: 100px;
+            }
+        }
+
+
+        .searchbar{
+            input{
+                width: 15rem;
+                outline: none;
+                border: none;
+                padding: 10px;
+                border-radius: 10px;
+            }
+        }
+
+        .user{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            img{
+                height: 40px;
+                width: 40px;
+                border-radius: 50%;
+                object-fit: cover;
+                margin-left: 10px;
+            }
+            .userinfo{
+                display: flex;
+                flex-direction: column;
+                justify-content: right;
+
+                .role{
+                    font-size: 10px;
+                    color: rgb(209, 194, 194);
+                }
+                .name{
+                    font-size: 18px;
+                }
+                span{
+                    margin-right: 10px;
+                }
+            }
+        }
+    }
+
+    .box1{
+        flex: 15;
+        background-color: #181717;
+        display: flex;
+
+        .sidenavbar{
+            flex: 1;
+            background-color: #434141;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+
+            .icon{
+                cursor: pointer;
+                font-size: 20px;
+                padding: 10px;
+                margin: 5px 15px;
+            }
+
+        }
+
+        .books{
+            flex: 25;
+
+            .table{
+                .button{
+                    display: flex;
+                    justify-content: space-between;
+                }
+                
+                .user{
+                    display: flex;
+                    align-items: center;
+                    span{
+                        margin-left: 5px;
+                    }
+                    img{
+                        height: 16px;
+                        width: 16px;
+                        object-fit: cover;
+                        border-radius: 50%;
+                    }
+                }
+
+                
+            }
+        }
+    }
+}
