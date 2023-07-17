@@ -16,32 +16,43 @@ import DialogTitle from '@mui/material/DialogTitle';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import { UserContext } from '../Contexts/UserContext';
+import { addDoc, collection } from 'firebase/firestore';
+import { db } from '../firebase/firebase';
 
 
-export const AddBookForm = () => {
+export const AddBookForm = ({ open, handleClose }) => {
 
-    const [open, setOpen] = useState(false);
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
+    const bookListCollectionRef = collection(db, "Books")
 
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
+    const [title, setTitle] = useState("")
+    const [author, setAuthor] = useState("")
+    const [category, setCat] = useState("")
+    const [publisher, setPub] = useState("")
+    const [isbn, setIsbn] = useState("")
+    const [copies, setCopies] = useState("")
+    const [available, setAvai] = useState("")
+    const [bid, setBid] = useState("")
+    const [price, setPrice] = useState("")
 
-    const handleClose = () => {
-        setOpen(false);
-    };
+    const handleSubmit = async (e) => {
+        if (title === "" || author === "" || category === "" || publisher === "" || isbn === 0 || copies === 0 || bid === "" || price === 0) {
+            // Handle the validation error, e.g., show an error message
+            return;
+        }
+
+        const obj = { title, author, category, publisher, isbn, copies, available, bid, price };
+        const createBook = async () => {
+            await addDoc(bookListCollectionRef, obj)
+        }
+        createBook()
+        handleClose()
+
+    }
 
     return (
         <div>
-            <Button
-                variant="contained"
-                component={Link}
-                size="small"
-                onClick={handleClickOpen}
-                style={{ background: "white", margin: "5px", color: "black", fontSize: "10px" }}
-            >Add Book</Button>
-
             <Dialog
                 fullScreen={fullScreen}
                 open={open}
@@ -52,33 +63,35 @@ export const AddBookForm = () => {
                     {"Add Book"}
                 </DialogTitle>
                 <DialogContent style={{ minHeight: "300px" }}>
-                    <form className='form' >
-                        <input type="text" placeholder="Title..." />
-                        <input type="text" placeholder="Author..." />
-                        <input type="text" placeholder="Category..." />
-                        <input type="text" placeholder="Publisher..." />
-                        <input type="text" placeholder="ISBN..." />
-                        <input type="number" placeholder="Copies..." />
-                        <input type="text" placeholder="Book-ID..." />
-                        <input type="number" placeholder="Price..." />
+                    <form className='form'  >
+                        <input type="text" placeholder="Title..." onChange={e => setTitle(e.target.value)} />
+                        <input type="text" placeholder="Author..." onChange={e => setAuthor(e.target.value)} />
+                        <input type="text" placeholder="Category..." onChange={e => setCat(e.target.value)} />
+                        <input type="text" placeholder="Publisher..." onChange={e => setPub(e.target.value)} />
+                        <input type="text" placeholder="ISBN..." onChange={e => setIsbn(e.target.value)} />
+                        <input type="number" placeholder="Copies..." onChange={e => setCopies(e.target.value)} />
+                        <input type="text" placeholder="Book-ID..." onChange={e => setBid(e.target.value)} />
+                        <input type="number" placeholder="Price..." onChange={e => setPrice(e.target.value)} />
+
+                        <DialogActions>
+                            <Button
+                                variant="contained"
+                                component={Link}
+                                size="small"
+                                onClick={handleSubmit}
+                                style={{ background: "green", margin: "5px", color: "white", fontSize: "10px" }}
+                            >Add</Button>
+                            <Button
+                                variant="contained"
+                                component={Link}
+                                size="small"
+                                onClick={handleClose}
+                                style={{ background: "red", margin: "5px", color: "white", fontSize: "10px" }}
+                            >Discard</Button>
+                        </DialogActions>
                     </form>
                 </DialogContent>
-                <DialogActions>
-                    <Button
-                        variant="contained"
-                        component={Link}
-                        size="small"
-                        onClick={handleClose}
-                        style={{ background: "green", margin: "5px", color: "white", fontSize: "10px" }}
-                    >Add</Button>
-                    <Button
-                        variant="contained"
-                        component={Link}
-                        size="small"
-                        onClick={handleClose}
-                        style={{ background: "red", margin: "5px", color: "white", fontSize: "10px" }}
-                    >Discard</Button>
-                </DialogActions>
+
             </Dialog>
         </div>
     )
@@ -89,6 +102,16 @@ export const BooksListMini = () => {
 
     const { booksList } = useContext(BooksContext);
     const { isAdmin } = useContext(UserContext)
+
+    const [open, setOpen] = useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
 
     return (
         <div>
@@ -129,7 +152,15 @@ export const BooksListMini = () => {
                                 </TableBody>
                             </Table>
                             <div className="button">
-                                {isAdmin && <AddBookForm />}
+                                {isAdmin && <>
+                                    <Button
+                                        variant="contained"
+                                        component={Link}
+                                        size="small"
+                                        onClick={handleClickOpen}
+                                        style={{ background: "white", margin: "5px", color: "black", fontSize: "10px" }}
+                                    >Add Book</Button>
+                                    <AddBookForm open={open} handleClose={handleClose} /></>}
                                 <Button
                                     variant="contained"
                                     component={Link}

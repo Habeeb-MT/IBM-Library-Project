@@ -14,6 +14,7 @@ form{
         color: rgb(171, 159, 159);
     }
 
+
     button{
         background-color: #128C7E;
         color: white;
@@ -26,6 +27,7 @@ form{
     }
 
     label{
+        padding: 0 10px;
         display: flex;
         align-items: center;
         gap: 10px;
@@ -36,6 +38,19 @@ form{
         img{
             width: 32px;
         }
+    }
+
+    .flex{
+        display: flex;
+        gap: 20px;
+        align-items: center;
+    }
+}
+
+// edit form width
+.edit{
+    input{
+        width: 200px;
     }
 }
 

@@ -43,6 +43,7 @@ export const UsersList = () => {
                                         <TableCell style={{ fontSize: "16px", color: "white" }} align="center">email</TableCell>
                                         <TableCell style={{ fontSize: "16px", color: "white" }} align="center">Phone</TableCell>
                                         <TableCell style={{ fontSize: "16px", color: "white" }} align="center">College</TableCell>
+                                        <TableCell style={{ fontSize: "16px", color: "white" }} align="center">Year</TableCell>
                                         <TableCell style={{ fontSize: "16px", color: "white" }} align="center">Issued</TableCell>
                                         <TableCell style={{ fontSize: "16px", color: "white" }} align="center">Action</TableCell>
                                     </TableRow>
@@ -66,6 +67,7 @@ export const UsersList = () => {
                                             <TableCell style={{ fontSize: "12px", color: "white" }} align="center">{user.email}</TableCell>
                                             <TableCell style={{ fontSize: "12px", color: "white" }} align="center">{user.phone}</TableCell>
                                             <TableCell style={{ fontSize: "12px", color: "white" }} align="center">{user.college}</TableCell>
+                                            <TableCell style={{ fontSize: "12px", color: "white" }} align="center">{user.year}</TableCell>
                                             <TableCell style={{ fontSize: "12px", color: "white" }} align="center">{user.issued}</TableCell>
                                             <TableCell align="center">
                                                 <Button

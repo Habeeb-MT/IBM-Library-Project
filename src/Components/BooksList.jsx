@@ -11,28 +11,83 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { BooksContext } from '../Contexts/BooksContext';
 import { UserContext } from '../Contexts/UserContext';
+import { db } from '../firebase/firebase';
+import { deleteDoc, doc } from 'firebase/firestore';
 import { AddBookForm } from './BooksListMini';
+import { EditBookForm } from './EditBookForm';
 
 export const BooksList = () => {
+
     const { booksList } = useContext(BooksContext);
     const [rowPerPage, setRowsPerPage] = useState(10)
     const [page, setPage] = useState(0)
     const { isAdmin } = useContext(UserContext)
+
+    // const booksCollectionRef = collection(db, "Books");
+
+    // useEffect(() => {
+    //     // Fetch books data from the database and update the booksList state
+    //     const fetchBooks = async () => {
+    //         const user = await getDocs(booksCollectionRef);
+    //         setBooksList(user.docs.map((doc) => ({
+    //             ...doc.data(), id: doc.id
+    //         })))
+    //     };
+
+    //     fetchBooks();
+    // }, [booksList.length]);
+    // console.log(booksList)
+
+    const deleteBook = async (id) => {
+        console.log(id)
+        const doDoc = doc(db, "Books", id)
+        await deleteDoc(doDoc)
+    }
+
+    const [openEdit, setOpenEdit] = useState(false);
+    const [open, setOpen] = useState(false)
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+    const handleCloseEdit = () => {
+        setOpenEdit(false);
+    };
+
+    const [data, setData] = useState({
+        title: "",
+        author: "",
+        publisher: "",
+        price: 0,
+        copies: 0,
+        available: 0,
+        bid: "",
+        category: "",
+        isbn: 0,
+        id: ""
+    })
+
+
     return (
         <div>
             <div className="heading" style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                 <Typography variant='h5' style={{ textAlign: "center", margin: "20px 40px" }}>Books Lists</Typography>
                 {isAdmin ? (
-                    <Typography style={{ textAlign: "center", margin: "20px 40px" }}>
-                        {/* <Button
-                            variant="contained"
-                            component={Link}
-                            size="small"
-                            // to={`/admin/books/addbook`}
-                            style={{ background: "#2a9942" }}
-                        >Add Book</Button> */}
-                        <AddBookForm />
-                    </Typography>
+                    <>
+                        <Typography style={{ textAlign: "center", margin: "20px 40px" }}>
+                            <Button
+                                variant="contained"
+                                component={Link}
+                                size="small"
+                                onClick={() => {
+                                    setOpen(true)
+                                }}
+                                style={{ background: "white", margin: "5px", color: "black", fontSize: "10px" }}
+                            >Add Book</Button>
+                            <AddBookForm open={open} handleClose={handleClose} />
+
+                        </Typography>
+                    </>
                 ) : ("")}
             </div>
             {booksList.length >= 1 ? (
@@ -82,7 +137,6 @@ export const BooksList = () => {
                                                     variant="contained"
                                                     component={Link}
                                                     size="small"
-                                                    // to={isAdmin ? `/admin/books/${book?.isbn}/details` : `/student/books/${book?.isbn}/details`}
                                                     // onClick={() => navigate(`/books/${book.isbn}`)}
                                                     style={{ background: "#2a9942", margin: "1px", fontSize: "10px" }}
                                                     state={book}
@@ -92,19 +146,33 @@ export const BooksList = () => {
                                                         variant="contained"
                                                         component={Link}
                                                         size="small"
-                                                        // to={`/admin/books/${book?.isbn}/details/updatebook`}
-                                                        // onClick={() => navigate(`/books/${book.isbn}`)}
+                                                        onClick={() => {
+                                                            setData({
+                                                                title: book?.title,
+                                                                author: book?.author,
+                                                                category: book?.category,
+                                                                publisher: book?.publisher,
+                                                                bid: book?.bid,
+                                                                isbn: book?.isbn,
+                                                                copies: book?.copies,
+                                                                available: book?.available,
+                                                                price: book?.price,
+                                                                id: book?.id
+                                                            })
+                                                            setOpenEdit(true)
+
+                                                        }}
                                                         style={{ background: "#2a9942", margin: "1px", fontSize: "10px" }}
-                                                        state={book}
                                                     >Edit</Button>
+
                                                     <Button
                                                         variant="contained"
                                                         component={Link}
                                                         size="small"
-                                                        // onClick={() => deleteBook(book?.id)}
+                                                        onClick={() => deleteBook(book?.id)}
                                                         style={{ background: "red", margin: "1px", fontSize: "10px" }}
-                                                        state={book}
                                                     >Delete</Button>
+                                                    <EditBookForm openEdit={openEdit} handleCloseEdit={handleCloseEdit} data={data} />
                                                 </>}
                                             </TableCell>
                                         </TableRow>

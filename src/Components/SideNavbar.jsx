@@ -1,11 +1,12 @@
-import React, { useContext } from "react";
-import { TbSettings, TbUsers, TbLogout, TbBooks, TbRefresh, TbBook } from "react-icons/tb";
+import React, { useContext, useEffect, useState } from "react";
+import { TbSettings, TbUsers, TbLogout, TbRefresh, TbBook } from "react-icons/tb";
 import { MdOutlineNotifications, MdOutlineLightMode, MdOutlineDarkMode } from "react-icons/md";
 import { auth } from "../firebase/firebase";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../Contexts/UserContext";
 import { PiBooks } from "react-icons/pi";
+
 export const SideNavbar = () => {
     const { isAdmin } = useContext(UserContext)
     const navigate = useNavigate()
@@ -14,6 +15,12 @@ export const SideNavbar = () => {
         signOut(auth)
         navigate("/")
     }
+
+    const [darkMode, setDarkMode] = useState(false);
+
+    const toggleMode = () => {
+        setDarkMode(!darkMode);
+    };
 
     return (
         <div className="sidenavbar">
@@ -34,11 +41,8 @@ export const SideNavbar = () => {
                 </div>}
             </div>
             <div className="settings">
-                <div className="icon">
-                    <MdOutlineLightMode />
-                </div>
-                <div className="icon">
-                    <MdOutlineDarkMode />
+                <div className="icon" onClick={toggleMode}>
+                    {darkMode ? <MdOutlineLightMode /> : <MdOutlineDarkMode />}
                 </div>
                 <div className="icon">
                     <TbSettings />

@@ -4,8 +4,8 @@ import "./LogReg.scss"
 // import logo from "../images/icons8-whatsapp-48.png"
 import { auth } from '../../firebase/firebase'
 import { signInWithEmailAndPassword } from 'firebase/auth'
-import {MdOutlineLightMode} from "react-icons/md";
-import {MdOutlineDarkMode} from "react-icons/md";
+import { MdOutlineLightMode } from "react-icons/md";
+import { MdOutlineDarkMode } from "react-icons/md";
 
 export const Login = () => {
 
@@ -28,28 +28,28 @@ export const Login = () => {
     }
 
     return (
-        
+
         <div className="fullContainer">
-            <div className="icon"><MdOutlineDarkMode/></div>
+            <div className="icon"><MdOutlineDarkMode /></div>
             <div className="formContainer">
-            <div className="formWrapper">
-                {/* <img src={logo} alt="" /> */}
-                <span className="logo">BookHive</span>
-                <span className="reg">Login</span>
-                <form onSubmit={handleSubmit} >
-                    <input type="email" placeholder="email..." />
-                    <input type="password" placeholder="password..." />
-                    <button>sign in</button>
-                    {err && <>
-                        <span style={{ color: "red" }}>Something went wrong!</span>
-                        { <p style={{ color: "red" }}>{err}</p> }
-                     </>}
-                </form>
-                <p>
-                    New user? <Link to="/register"><span>Signup</span></Link>
-                </p>
+                <div className="formWrapper">
+                    {/* <img src={logo} alt="" /> */}
+                    <span className="logo">BookHive</span>
+                    <span className="reg">Login</span>
+                    <form onSubmit={handleSubmit} >
+                        <input type="email" placeholder="email..." />
+                        <input type="password" placeholder="password..." />
+                        <button>sign in</button>
+                        {err && <>
+                            <span style={{ color: "red" }}>Something went wrong!</span>
+                            {<p style={{ color: "red" }}>{err}</p>}
+                        </>}
+                    </form>
+                    <p>
+                        New user? <Link to="/register"><span>Signup</span></Link>
+                    </p>
+                </div>
             </div>
-        </div>
         </div>
     )
 }

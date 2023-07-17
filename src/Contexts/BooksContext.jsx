@@ -1,7 +1,6 @@
-import { collection } from 'firebase/firestore';
+import { collection, onSnapshot } from 'firebase/firestore';
 import React, { createContext, useState, useEffect } from 'react'
 import { db } from '../firebase/firebase';
-import { getDocs } from 'firebase/firestore';
 
 export const BooksContext = createContext();
 export const BooksContextProvider = ({ children }) => {
@@ -16,20 +15,39 @@ export const BooksContextProvider = ({ children }) => {
     // console.log(booksList)
 
 
+    // const getBooksList = async () => {
+    //     try {
+    //         const user = await getDocs(booksCollectionRef);
+    //         setBooksList(user.docs.map((doc) => ({
+    //             ...doc.data(), id: doc.id
+    //         })))
+    //     }
+    //     catch (error) {
+    //         console.log(error)
+    //     }
+    // }
+
     const getBooksList = async () => {
         try {
-            const user = await getDocs(booksCollectionRef);
-            setBooksList(user.docs.map((doc) => ({
-                ...doc.data(), id: doc.id
-            })))
+            const unsubscribe = onSnapshot(booksCollectionRef, (querySnapshot) => {
+                const books = querySnapshot.docs.map((doc) => ({
+                    ...doc.data(),
+                    id: doc.id,
+                }));
+                setBooksList(books);
+            });
+
+            return () => {
+                // Unsubscribe from the real-time updates when the component unmounts
+                unsubscribe();
+            };
+        } catch (error) {
+            console.log(error);
         }
-        catch (error) {
-            console.log(error)
-        }
-    }
+    };
 
     return (
-        <BooksContext.Provider value={{ booksList }}>
+        <BooksContext.Provider value={{ booksList, setBooksList }}>
             {children}
         </BooksContext.Provider>
     )
