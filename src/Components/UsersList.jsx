@@ -13,11 +13,14 @@ import { useState } from 'react';
 import { AddUserForm } from './UsersListMini';
 
 export const UsersList = () => {
-    const { isAdmin } = useContext(UserContext)
+    const { isAdmin } = useContext(UserContext);
 
     const { usersList } = useContext(UserContext);
-    const [rowPerPage, setRowsPerPage] = useState(10)
-    const [page, setPage] = useState(0)
+    const [rowPerPage, setRowsPerPage] = useState(10);
+    const [page, setPage] = useState(0);
+
+    // Filter out admin users from the list
+    const filteredUsers = usersList.filter((user) => user.role !== "admin");
 
     return (
         <div>
@@ -29,7 +32,7 @@ export const UsersList = () => {
                     </Typography>
                 ) : ("")}
             </div>
-            {usersList.length >= 1 ? (
+            {filteredUsers.length >= 1 ? (
                 <>
                     <div className='table' style={{ padding: "20px" }}>
                         <TableContainer component={Paper} style={{ background: "#434141" }} >
@@ -50,10 +53,9 @@ export const UsersList = () => {
                                 </TableHead>
                                 <TableBody>
                                     {(rowPerPage > 0
-                                        ? usersList.slice(page * rowPerPage, page * rowPerPage + rowPerPage)
-                                        : usersList
+                                        ? filteredUsers.slice(page * rowPerPage, page * rowPerPage + rowPerPage)
+                                        : filteredUsers
                                     ).map((user, index) => (
-                                        user.role !== "admin" &&
                                         <TableRow
                                             key={user?.lid}
                                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -75,7 +77,6 @@ export const UsersList = () => {
                                                     variant="contained"
                                                     component={Link}
                                                     size="small"
-
                                                     style={{ background: "#2a9942", margin: "1px", fontSize: "10px" }}
                                                 // state={book}
                                                 >View</Button>
@@ -84,7 +85,6 @@ export const UsersList = () => {
                                                         variant="contained"
                                                         component={Link}
                                                         size="small"
-
                                                         style={{ background: "#2a9942", margin: "1px", fontSize: "10px" }}
                                                     // state={book}
                                                     >Edit</Button>
@@ -106,11 +106,11 @@ export const UsersList = () => {
                         </TableContainer>
                         <TablePagination
                             onRowsPerPageChange={(e) => {
-                                setRowsPerPage(parseInt(e.target.value, 10))
-                                setPage(0)
+                                setRowsPerPage(parseInt(e.target.value, 10));
+                                setPage(0);
                             }}
                             component="div"
-                            count={usersList.length}
+                            count={filteredUsers.length}
                             rowsPerPage={rowPerPage}
                             page={page}
                             onPageChange={(e, newPage) => setPage(newPage)}
@@ -126,5 +126,5 @@ export const UsersList = () => {
             )
             }
         </div>
-    )
-}
+    );
+};

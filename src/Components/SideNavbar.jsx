@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { TbSettings, TbUsers, TbLogout, TbRefresh, TbBook } from "react-icons/tb";
+import { TbSettings, TbUsers, TbLogout, TbHome, TbBook } from "react-icons/tb";
 import { MdOutlineNotifications, MdOutlineLightMode, MdOutlineDarkMode } from "react-icons/md";
 import { auth } from "../firebase/firebase";
 import { signOut } from "firebase/auth";
@@ -28,7 +28,7 @@ export const SideNavbar = () => {
         <div className="sidenavbar">
             <div className="features">
                 <div className="icon">
-                    <TbRefresh />
+                    <TbHome onClick={() => navigate("/")} />
                 </div>
                 <div className="icon">
                     <MdOutlineNotifications />

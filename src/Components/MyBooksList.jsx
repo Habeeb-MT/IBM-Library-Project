@@ -57,6 +57,7 @@ export const MyBooksList = () => {
         };
         fetchBorrowedBooks(actUser?.uid)
     }, [])
+    // console.log(myBooks)
 
     useEffect(() => {
         const checkBorrowedStatus = async () => {
@@ -84,14 +85,17 @@ export const MyBooksList = () => {
         try {
             const borrowedBooksRef = doc(db, "BorrowedBooks", actUser.uid);
             await updateDoc(borrowedBooksRef, {
-                borrowed: arrayRemove(book?.bid)
+                borrowed: arrayRemove(book?.bid),
             });
+
+            // Update the myBooks state by removing the returned book from the array
+            setMyBooks((prevMyBooks) => prevMyBooks.filter((b) => b !== book?.bid));
+
             setIsBorrowed(false);
         } catch (error) {
             console.error('Error returning book:', error);
         }
     };
-
 
     return (
         <div>
@@ -150,9 +154,9 @@ export const MyBooksList = () => {
                                                             size="small"
                                                             onClick={() => {
                                                                 setOpenView(true);
-                                                                setBook(book);
                                                             }}
                                                             style={{ background: "#2a9942", margin: "1px", fontSize: "10px" }}
+                                                            state={book}
                                                         >
                                                             View
                                                         </Button>

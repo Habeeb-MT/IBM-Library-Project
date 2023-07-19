@@ -68,7 +68,6 @@ export const AddUserForm = ({ open, handleClose }) => {
 };
 
 
-
 export const UsersListMini = () => {
     const { usersList } = useContext(UserContext);
     const [open, setOpen] = useState(false);
@@ -81,9 +80,12 @@ export const UsersListMini = () => {
         setOpen(false);
     };
 
+    // Filter out admin users from the list
+    const filteredUsers = usersList.filter((user) => user.role !== "admin");
+
     return (
         <div>
-            {usersList.length >= 1 ? (
+            {filteredUsers.length >= 1 ? (
                 <>
                     <div className="List">
                         <TableContainer component={Paper} style={{ background: "#434141" }}>
@@ -114,32 +116,30 @@ export const UsersListMini = () => {
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {usersList.map((user, index) => (
-                                        user.role !== "admin" && (
-                                            <TableRow key={user.isbn} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
-                                                <TableCell style={{ fontSize: "12px", color: "white" }} align="center">
-                                                    {index + 1}
-                                                </TableCell>
-                                                <TableCell component="th" scope="row" align="center" style={{ fontSize: "12px", color: "white" }}>
-                                                    <div className="user">
-                                                        <img src={user.photoURL} alt="" />
-                                                        <span>{user.displayName}</span>
-                                                    </div>
-                                                </TableCell>
-                                                <TableCell style={{ fontSize: "12px", color: "white" }} align="center">
-                                                    {user.email}
-                                                </TableCell>
-                                                <TableCell style={{ fontSize: "12px", color: "white" }} align="center">
-                                                    {user.lid}
-                                                </TableCell>
-                                                <TableCell style={{ fontSize: "12px", color: "white" }} align="center">
-                                                    {user.phone}
-                                                </TableCell>
-                                                <TableCell style={{ fontSize: "12px", color: "white" }} align="center">
-                                                    ---
-                                                </TableCell>
-                                            </TableRow>
-                                        )
+                                    {filteredUsers.map((user, index) => (
+                                        <TableRow key={user.isbn} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+                                            <TableCell style={{ fontSize: "12px", color: "white" }} align="center">
+                                                {index + 1}
+                                            </TableCell>
+                                            <TableCell component="th" scope="row" align="center" style={{ fontSize: "12px", color: "white" }}>
+                                                <div className="user">
+                                                    <img src={user.photoURL} alt="" />
+                                                    <span>{user.displayName}</span>
+                                                </div>
+                                            </TableCell>
+                                            <TableCell style={{ fontSize: "12px", color: "white" }} align="center">
+                                                {user.email}
+                                            </TableCell>
+                                            <TableCell style={{ fontSize: "12px", color: "white" }} align="center">
+                                                {user.lid}
+                                            </TableCell>
+                                            <TableCell style={{ fontSize: "12px", color: "white" }} align="center">
+                                                {user.phone}
+                                            </TableCell>
+                                            <TableCell style={{ fontSize: "12px", color: "white" }} align="center">
+                                                ---
+                                            </TableCell>
+                                        </TableRow>
                                     ))}
                                 </TableBody>
                             </Table>
