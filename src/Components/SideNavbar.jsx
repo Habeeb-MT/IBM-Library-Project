@@ -22,6 +22,8 @@ export const SideNavbar = () => {
         setDarkMode(!darkMode);
     };
 
+    const { actUser } = useContext(UserContext)
+
     return (
         <div className="sidenavbar">
             <div className="features">
@@ -37,7 +39,7 @@ export const SideNavbar = () => {
                 {isAdmin ? <div className="icon">
                     <TbUsers onClick={() => { navigate("/users") }} />
                 </div> : <div className="icon">
-                    <TbBook />
+                    <TbBook onClick={() => { navigate(`/${actUser?.lid}/books`) }} />
                 </div>}
             </div>
             <div className="settings">

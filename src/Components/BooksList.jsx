@@ -15,6 +15,7 @@ import { db } from '../firebase/firebase';
 import { deleteDoc, doc } from 'firebase/firestore';
 import { AddBookForm } from './BooksListMini';
 import { EditBookForm } from './EditBookForm';
+import { ViewBook } from './ViewBook';
 
 export const BooksList = () => {
 
@@ -46,12 +47,16 @@ export const BooksList = () => {
 
     const [openEdit, setOpenEdit] = useState(false);
     const [open, setOpen] = useState(false)
+    const [openView, setOpenView] = useState(false)
 
     const handleClose = () => {
         setOpen(false);
     };
     const handleCloseEdit = () => {
         setOpenEdit(false);
+    };
+    const handleCloseView = () => {
+        setOpenView(false);
     };
 
     const [data, setData] = useState({
@@ -104,8 +109,6 @@ export const BooksList = () => {
                                         <TableCell style={{ fontSize: "16px", color: "white" }} align="center">Author</TableCell>
                                         <TableCell style={{ fontSize: "16px", color: "white" }} align="center">Category</TableCell>
                                         <TableCell style={{ fontSize: "16px", color: "white" }} align="center">Publisher</TableCell>
-                                        <TableCell style={{ fontSize: "16px", color: "white" }} align="center">ISBN</TableCell>
-                                        <TableCell style={{ fontSize: "16px", color: "white" }} align="center">Copies</TableCell>
                                         <TableCell style={{ fontSize: "16px", color: "white" }} align="center">Available</TableCell>
                                         <TableCell style={{ fontSize: "16px", color: "white" }} align="center">Price</TableCell>
                                         <TableCell style={{ fontSize: "16px", color: "white" }} align="center">Action</TableCell>
@@ -128,8 +131,6 @@ export const BooksList = () => {
                                             <TableCell style={{ fontSize: "13px", color: "white" }} align="center">{book?.author}</TableCell>
                                             <TableCell style={{ fontSize: "13px", color: "white" }} align="center">{book?.category}</TableCell>
                                             <TableCell style={{ fontSize: "13px", color: "white" }} align="center">{book?.publisher}</TableCell>
-                                            <TableCell style={{ fontSize: "13px", color: "white" }} align="center">{book?.isbn}</TableCell>
-                                            <TableCell style={{ fontSize: "13px", color: "white" }} align="center">{book?.copies}</TableCell>
                                             <TableCell style={{ fontSize: "13px", color: "white" }} align="center">{book?.available}</TableCell>
                                             <TableCell style={{ fontSize: "13px", color: "white" }} align="center">&#8377;{book?.price}</TableCell>
                                             <TableCell align="center">
@@ -137,7 +138,9 @@ export const BooksList = () => {
                                                     variant="contained"
                                                     component={Link}
                                                     size="small"
-                                                    // onClick={() => navigate(`/books/${book.isbn}`)}
+                                                    onClick={() => {
+                                                        setOpenView(true)
+                                                    }}
                                                     style={{ background: "#2a9942", margin: "1px", fontSize: "10px" }}
                                                     state={book}
                                                 >View</Button>
@@ -172,8 +175,9 @@ export const BooksList = () => {
                                                         onClick={() => deleteBook(book?.id)}
                                                         style={{ background: "red", margin: "1px", fontSize: "10px" }}
                                                     >Delete</Button>
-                                                    <EditBookForm openEdit={openEdit} handleCloseEdit={handleCloseEdit} data={data} />
                                                 </>}
+                                                <EditBookForm openEdit={openEdit} handleCloseEdit={handleCloseEdit} data={data} />
+                                                <ViewBook openView={openView} handleCloseView={handleCloseView} />
                                             </TableCell>
                                         </TableRow>
                                     ))

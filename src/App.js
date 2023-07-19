@@ -7,6 +7,7 @@ import { useContext } from 'react';
 import { UserContext } from './Contexts/UserContext';
 import { BooksTable } from './Pages/BooksTable';
 import { UsersTable } from './Pages/UsersTable';
+import { MyBooksTable } from './Pages/MyBooksTable';
 
 
 
@@ -30,6 +31,7 @@ function App() {
         <Routes>
           <Route path='/' element={<ProtectedRoute> <Home /></ProtectedRoute>} />
           <Route path='/books' element={<BooksTable />} />
+          <Route path='/:lid/books' element={<MyBooksTable />} />
           <Route path='/users' element={<UsersTable />} />
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />

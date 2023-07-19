@@ -53,6 +53,7 @@ export const UsersList = () => {
                                         ? usersList.slice(page * rowPerPage, page * rowPerPage + rowPerPage)
                                         : usersList
                                     ).map((user, index) => (
+                                        user.role !== "admin" &&
                                         <TableRow
                                             key={user?.lid}
                                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
