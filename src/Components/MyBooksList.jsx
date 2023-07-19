@@ -25,21 +25,6 @@ export const MyBooksList = () => {
     const { isAdmin } = useContext(UserContext)
     const [isBorrowed, setIsBorrowed] = useState(false);
     const { actUser } = useContext(UserContext)
-    // const booksCollectionRef = collection(db, "Books");
-
-    // useEffect(() => {
-    //     // Fetch books data from the database and update the booksList state
-    //     const fetchBooks = async () => {
-    //         const user = await getDocs(booksCollectionRef);
-    //         setBooksList(user.docs.map((doc) => ({
-    //             ...doc.data(), id: doc.id
-    //         })))
-    //     };
-
-    //     fetchBooks();
-    // }, [booksList.length]);
-    // console.log(booksList)
-
 
     const [openView, setOpenView] = useState(false)
 
@@ -50,18 +35,6 @@ export const MyBooksList = () => {
         setOpenView(false);
     };
 
-    const [data, setData] = useState({
-        title: "",
-        author: "",
-        publisher: "",
-        price: 0,
-        copies: 0,
-        available: 0,
-        bid: "",
-        category: "",
-        isbn: 0,
-        id: ""
-    })
 
     useEffect(() => {
         const fetchBorrowedBooks = async (userId) => {
