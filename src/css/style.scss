@@ -1,23 +1,56 @@
+
+@mixin mobile {
+    @media screen  and (max-width:541px){
+        @content;
+    }
+}
+@mixin minitablet {
+    @media screen  and (max-width:621px){
+        @content;
+    }
+}
+@mixin tablet {
+    @media screen  and (max-width:768px){
+        @content;
+    }
+}
+
+@mixin minilaptop {
+    @media screen  and (max-width:1090px){
+        @content;
+    }
+}
+
+@mixin laptop {
+    @media screen  and (min-width:1090px){
+        @content;
+    }
+}
+
+
 form{
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 10px  ;
 
-    input{
+    input {
         padding: 10px;
-        border: none;
-        outline: none;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
         width: 300px;
-        border-bottom: 2px solid #128C7E;
-        background: transparent;
-        font-size: 15px ;
-        color: rgb(171, 159, 159);
-    }
+        
+        &:focus {
+          outline: none;
+          border-color: var(--mainColor);
+        }
+      }
 
 
     button{
-        background-color: #128C7E;
-        color: white;
+        background-color: var(--mainColor);
+        color: var(--whiteColor);
         padding: 10px;
         font-weight: bold;
         font-size: 20px;
@@ -32,7 +65,7 @@ form{
         align-items: center;
         gap: 10px;
         font-size: 12px;
-        color: #128C7E;
+        color: var(--mainColor);
         cursor: pointer;
 
         img{
@@ -45,8 +78,55 @@ form{
         gap: 20px;
         align-items: center;
     }
+
 }
 
+.bookForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    .columns {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      
+      .col {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+    
+    input {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+      width: 200px;
+      
+      &:focus {
+        outline: none;
+        border-color: var(--mainColor);
+      }
+    }
+    
+    textarea {
+      height: 100px;
+      width: 400px;
+      resize: none;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+
+      &:focus {
+        outline: none;
+        border-color: var(--mainColor);
+      }
+    }
+  }
 // edit form width
 .edit{
     input{
@@ -56,43 +136,86 @@ form{
 
 
 .bookstable{
-    background-color:#434141;
+    background-color:var(--bg1);
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     // align-items: stretch;
-    color: white;
+    color: var(--whiteColor);
     width: 100%;
 
 
     .navbar{
         flex: 1.5;
         top: 0;
-        color: white;
+        color: var(--whiteColor);
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
         padding: 0 20px;
 
+        @include minilaptop{
+            padding: 10px;
+        }
+
         .logo{
+            display: flex;
+            justify-content: center;
+            align-items: center;
             .brand{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 5px;
+                color: var(--mainColor);
                 font-weight: bold;
                 font-size: 20px;
                 margin-right: 100px;
+                @include mobile{
+                    margin-right: 20px;
+                }
+                img{
+                    height: 50px;
+                    width: 50px;
+                    object-fit: contain;
+                    // margin-right: 10px;
+                }
+                span{
+                    @include mobile{
+                        display: none;
+                    }
+                }
+            }
+
+            .pageName{
+                color: var(--textColor);
+                @include tablet{
+                    display: none;
+                }
             }
         }
 
 
         .searchbar{
+            margin-left: 10px;
+            margin-right: 10px;
             input{
                 width: 15rem;
                 outline: none;
-                border: none;
-                padding: 10px;
-                border-radius: 10px;
+                border: 1px solid var(--mainColor);
+                padding: 5px;
+                border-radius: 5px;
+
+                @include tablet{
+                    width: 12rem;
+                }
+                @include mobile{
+                    width: 8rem;
+                }
             }
+
         }
 
         .user{
@@ -116,7 +239,9 @@ form{
                     color: rgb(209, 194, 194);
                 }
                 .name{
-                    font-size: 18px;
+                        font-size: 18px;
+                        font-weight: bold;
+                        color: var(--mainColor);
                 }
                 span{
                     margin-right: 10px;
@@ -127,22 +252,36 @@ form{
 
     .box1{
         flex: 15;
-        background-color: #181717;
+        background-color: var(--bg2);
         display: flex;
 
         .sidenavbar{
             flex: 1;
-            background-color: #434141;
+            background-color: var(--bg1);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             align-items: center;
 
             .icon{
-                cursor: pointer;
-                font-size: 20px;
-                padding: 10px;
-                margin: 5px 15px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    cursor: pointer;
+                    color: var(--mainColor);
+                    border: 1.5px solid var(--mainColor);
+                    border-radius: 50%;
+                    font-size: 20px;
+                    padding: 10px;
+                    margin: 10px 15px;
+
+                    &:hover {
+                        background: var(--mainColor);
+                        color: #fdfdfd;
+                        transition: ease-in-out;
+                        transition-duration: 0.3s;
+                        box-shadow: 0 0 0.5rem var(--mainColor);
+                      }
             }
 
         }
@@ -151,6 +290,7 @@ form{
             flex: 25;
 
             .table{
+
                 .button{
                     display: flex;
                     justify-content: space-between;
@@ -169,6 +309,33 @@ form{
                         border-radius: 50%;
                     }
                 }
+
+                .rmbtn{
+                    @include minilaptop{
+                        display: none;
+                    }
+                }
+                .minitablet{
+                    @include minitablet{
+                        display: none;
+                    }
+                }
+                .minilaptop{
+                    @include minilaptop{
+                        display: none;
+                    }
+                }
+                .tablet{
+                    @include tablet{
+                        display: none;
+                    }
+                }
+                .mobile{
+                    @include mobile{
+                        display: none;
+                    }
+                }
+                
 
                 
             }

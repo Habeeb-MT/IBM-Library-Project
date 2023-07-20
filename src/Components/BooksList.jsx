@@ -76,7 +76,7 @@ export const BooksList = () => {
     return (
         <div>
             <div className="heading" style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                <Typography variant='h5' style={{ textAlign: "center", margin: "20px 40px" }}>Books Lists</Typography>
+                <Typography variant='h5' style={{ textAlign: "center", margin: "20px 40px", color: "var(--textColor)" }}>Books Lists</Typography>
                 {isAdmin ? (
                     <>
                         <Typography style={{ textAlign: "center", margin: "20px 40px" }}>
@@ -87,7 +87,7 @@ export const BooksList = () => {
                                 onClick={() => {
                                     setOpen(true)
                                 }}
-                                style={{ background: "white", margin: "5px", color: "black", fontSize: "10px" }}
+                                style={{ background: "var(--mainColor)", margin: "5px", color: "white", fontSize: "10px" }}
                             >Add Book</Button>
                             <AddBookForm open={open} handleClose={handleClose} />
 
@@ -98,20 +98,19 @@ export const BooksList = () => {
             {booksList.length >= 1 ? (
                 <>
                     <div className='table' style={{ padding: "20px" }}>
-                        <TableContainer component={Paper} style={{ background: "#434141" }} >
+                        <TableContainer component={Paper} style={{ background: "var(--bg1)" }} >
 
-                            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                            <Table aria-label="simple table">
                                 <TableHead className='tablehead'>
                                     <TableRow>
-                                        <TableCell style={{ fontSize: "16px", color: "white" }} align="center">SI</TableCell>
-                                        <TableCell style={{ fontSize: "16px", color: "white" }} align="center">Book-ID</TableCell>
-                                        <TableCell style={{ fontSize: "16px", color: "white" }} align="center">Title</TableCell>
-                                        <TableCell style={{ fontSize: "16px", color: "white" }} align="center">Author</TableCell>
-                                        <TableCell style={{ fontSize: "16px", color: "white" }} align="center">Category</TableCell>
-                                        <TableCell style={{ fontSize: "16px", color: "white" }} align="center">Publisher</TableCell>
-                                        <TableCell style={{ fontSize: "16px", color: "white" }} align="center">Available</TableCell>
-                                        <TableCell style={{ fontSize: "16px", color: "white" }} align="center">Price</TableCell>
-                                        <TableCell style={{ fontSize: "16px", color: "white" }} align="center">Action</TableCell>
+                                        <TableCell style={{ fontSize: "16px", color: "var(--textColor)" }} align="center">SI</TableCell>
+                                        <TableCell className='tablet' style={{ fontSize: "16px", color: "var(--textColor)" }} align="center">Book-ID</TableCell>
+                                        <TableCell style={{ fontSize: "16px", color: "var(--textColor)" }} align="center">Title</TableCell>
+                                        <TableCell className='minitablet' style={{ fontSize: "16px", color: "var(--textColor)" }} align="center">Author</TableCell>
+                                        <TableCell className='tablet' style={{ fontSize: "16px", color: "var(--textColor)" }} align="center">Category</TableCell>
+                                        <TableCell className='minilaptop' style={{ fontSize: "16px", color: "var(--textColor)" }} align="center">Publisher</TableCell>
+                                        <TableCell className='mobile' style={{ fontSize: "16px", color: "var(--textColor)" }} align="center">Available</TableCell>
+                                        <TableCell style={{ fontSize: "16px", color: "var(--textColor)" }} align="center">Action</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -123,16 +122,15 @@ export const BooksList = () => {
                                             key={book?.isbn}
                                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                         >
-                                            <TableCell style={{ fontSize: "13px", color: "white" }} align="center">{index + 1}</TableCell>
-                                            <TableCell style={{ fontSize: "13px", color: "white" }} align="center">{book?.bid}</TableCell>
-                                            <TableCell component="th" scope="row" style={{ fontSize: "13px", color: "white" }} align="center">
+                                            <TableCell style={{ fontSize: "13px", color: "var(--textColor)" }} align="center">{index + 1}</TableCell>
+                                            <TableCell className='tablet' style={{ fontSize: "13px", color: "var(--textColor)" }} align="center">{book?.bid}</TableCell>
+                                            <TableCell component="th" scope="row" style={{ fontSize: "13px", color: "var(--textColor)" }} align="center">
                                                 {book?.title}
                                             </TableCell>
-                                            <TableCell style={{ fontSize: "13px", color: "white" }} align="center">{book?.author}</TableCell>
-                                            <TableCell style={{ fontSize: "13px", color: "white" }} align="center">{book?.category}</TableCell>
-                                            <TableCell style={{ fontSize: "13px", color: "white" }} align="center">{book?.publisher}</TableCell>
-                                            <TableCell style={{ fontSize: "13px", color: "white" }} align="center">{book?.available}</TableCell>
-                                            <TableCell style={{ fontSize: "13px", color: "white" }} align="center">&#8377;{book?.price}</TableCell>
+                                            <TableCell className='minitablet' style={{ fontSize: "13px", color: "var(--textColor)" }} align="center">{book?.author}</TableCell>
+                                            <TableCell className='tablet' style={{ fontSize: "13px", color: "var(--textColor)" }} align="center">{book?.category}</TableCell>
+                                            <TableCell className='minilaptop' style={{ fontSize: "13px", color: "var(--textColor)" }} align="center">{book?.publisher}</TableCell>
+                                            <TableCell className='mobile' style={{ fontSize: "13px", color: "var(--textColor)" }} align="center">{book?.available}</TableCell>
                                             <TableCell align="center">
                                                 <Button
                                                     variant="contained"
@@ -146,6 +144,7 @@ export const BooksList = () => {
                                                 >View</Button>
                                                 {isAdmin && <>
                                                     <Button
+                                                        className='rmbtn'
                                                         variant="contained"
                                                         component={Link}
                                                         size="small"
@@ -165,10 +164,11 @@ export const BooksList = () => {
                                                             setOpenEdit(true)
 
                                                         }}
-                                                        style={{ background: "#2a9942", margin: "1px", fontSize: "10px" }}
+                                                        style={{ background: "#754ef9", margin: "1px", fontSize: "10px" }}
                                                     >Edit</Button>
 
                                                     <Button
+                                                        className='rmbtn'
                                                         variant="contained"
                                                         component={Link}
                                                         size="small"
@@ -195,7 +195,7 @@ export const BooksList = () => {
                             rowsPerPage={rowPerPage}
                             page={page}
                             onPageChange={(e, newPage) => setPage(newPage)}
-                            style={{ color: "white" }}
+                            style={{ color: "var(--textColor)" }}
                         />
 
                     </div>

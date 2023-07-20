@@ -8,14 +8,7 @@ import { useTheme } from "@mui/material/styles";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@mui/material";
 import { UserContext } from "../Contexts/UserContext";
-import {
-    arrayUnion,
-    doc,
-    updateDoc,
-    getDoc,
-    arrayRemove,
-    collection,
-} from "firebase/firestore";
+import { arrayUnion, doc, updateDoc, getDoc, arrayRemove } from "firebase/firestore";
 import { db } from "../firebase/firebase";
 
 import photo from "../Images/IMG-20220503-WA0030.jpg";

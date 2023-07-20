@@ -18,6 +18,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
+import { DarkLightContext } from '../Contexts/DarkLightContext';
 
 export const AddUserForm = ({ open, handleClose }) => {
     const theme = useTheme();
@@ -26,7 +27,7 @@ export const AddUserForm = ({ open, handleClose }) => {
     return (
         <div>
             <Dialog maxWidth="md" fullScreen={fullScreen} open={open} onClose={handleClose} aria-labelledby="responsive-dialog-title">
-                <DialogTitle id="responsive-dialog-title">Add User</DialogTitle>
+                <DialogTitle style={{ color: "#754ef9" }} id="responsive-dialog-title" >Add User</DialogTitle>
                 <DialogContent style={{ minHeight: "300px" }}>
                     <form className="form">
                         <input type="text" placeholder="Name..." />
@@ -48,7 +49,7 @@ export const AddUserForm = ({ open, handleClose }) => {
                         component={Link}
                         size="small"
                         onClick={handleClose}
-                        style={{ background: "green", margin: "5px", color: "white", fontSize: "10px" }}
+                        style={{ background: "#754ef9", margin: "5px", color: "#fdfdfd", fontSize: "10px" }}
                     >
                         Add
                     </Button>
@@ -57,7 +58,7 @@ export const AddUserForm = ({ open, handleClose }) => {
                         component={Link}
                         size="small"
                         onClick={handleClose}
-                        style={{ background: "red", margin: "5px", color: "white", fontSize: "10px" }}
+                        style={{ background: "red", margin: "5px", color: "#fdfdfd", fontSize: "10px" }}
                     >
                         Discard
                     </Button>
@@ -71,7 +72,7 @@ export const AddUserForm = ({ open, handleClose }) => {
 export const UsersListMini = () => {
     const { usersList } = useContext(UserContext);
     const [open, setOpen] = useState(false);
-
+    const { darkMode } = useContext(DarkLightContext)
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -81,36 +82,36 @@ export const UsersListMini = () => {
     };
 
     // Filter out admin users from the list
-    const filteredUsers = usersList.filter((user) => user.role !== "admin");
+    const filteredUsers = usersList.filter((user) => user.role !== "admin").slice(0, 4);
 
     return (
         <div>
             {filteredUsers.length >= 1 ? (
                 <>
                     <div className="List">
-                        <TableContainer component={Paper} style={{ background: "#434141" }}>
-                            <Typography variant="h6" style={{ textAlign: "center", color: "white" }}>
+                        <TableContainer component={Paper} style={{ background: "var(--bg1)" }}>
+                            <Typography variant="h6" style={{ textAlign: "center", color: "var(--textColor)" }}>
                                 Users List
                             </Typography>
                             <Table sx={{ minWidth: 350 }} aria-label="simple table">
                                 <TableHead className="tablehead">
                                     <TableRow>
-                                        <TableCell style={{ fontSize: "12px", color: "white" }} align="center">
+                                        <TableCell style={{ fontSize: "12px", color: "var(--textColor)" }} align="center">
                                             SI
                                         </TableCell>
-                                        <TableCell style={{ fontSize: "12px", color: "white" }} align="left">
+                                        <TableCell style={{ fontSize: "12px", color: "var(--textColor)" }} align="left">
                                             Name
                                         </TableCell>
-                                        <TableCell style={{ fontSize: "12px", color: "white" }} align="center">
+                                        <TableCell style={{ fontSize: "12px", color: "var(--textColor)" }} align="center">
                                             Email
                                         </TableCell>
-                                        <TableCell style={{ fontSize: "12px", color: "white" }} align="center">
+                                        <TableCell style={{ fontSize: "12px", color: "var(--textColor)" }} align="center">
                                             ID
                                         </TableCell>
-                                        <TableCell style={{ fontSize: "12px", color: "white" }} align="center">
+                                        <TableCell style={{ fontSize: "12px", color: "var(--textColor)" }} align="center">
                                             Phone
                                         </TableCell>
-                                        <TableCell style={{ fontSize: "12px", color: "white" }} align="center">
+                                        <TableCell style={{ fontSize: "12px", color: "var(--textColor)" }} align="center">
                                             Actions
                                         </TableCell>
                                     </TableRow>
@@ -118,25 +119,25 @@ export const UsersListMini = () => {
                                 <TableBody>
                                     {filteredUsers.map((user, index) => (
                                         <TableRow key={user.isbn} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
-                                            <TableCell style={{ fontSize: "12px", color: "white" }} align="center">
+                                            <TableCell style={{ fontSize: "12px", color: "var(--textColor)" }} align="center">
                                                 {index + 1}
                                             </TableCell>
-                                            <TableCell component="th" scope="row" align="center" style={{ fontSize: "12px", color: "white" }}>
+                                            <TableCell component="th" scope="row" align="center" style={{ fontSize: "12px", color: "var(--textColor)" }}>
                                                 <div className="user">
                                                     <img src={user.photoURL} alt="" />
                                                     <span>{user.displayName}</span>
                                                 </div>
                                             </TableCell>
-                                            <TableCell style={{ fontSize: "12px", color: "white" }} align="center">
+                                            <TableCell style={{ fontSize: "12px", color: "var(--textColor)" }} align="center">
                                                 {user.email}
                                             </TableCell>
-                                            <TableCell style={{ fontSize: "12px", color: "white" }} align="center">
+                                            <TableCell style={{ fontSize: "12px", color: "var(--textColor)" }} align="center">
                                                 {user.lid}
                                             </TableCell>
-                                            <TableCell style={{ fontSize: "12px", color: "white" }} align="center">
+                                            <TableCell style={{ fontSize: "12px", color: "var(--textColor)" }} align="center">
                                                 {user.phone}
                                             </TableCell>
-                                            <TableCell style={{ fontSize: "12px", color: "white" }} align="center">
+                                            <TableCell style={{ fontSize: "12px", color: "var(--textColor)" }} align="center">
                                                 ---
                                             </TableCell>
                                         </TableRow>
@@ -149,7 +150,7 @@ export const UsersListMini = () => {
                                     component={Link}
                                     size="small"
                                     onClick={handleClickOpen}
-                                    style={{ background: "white", margin: "5px", color: "black", fontSize: "10px" }}
+                                    style={{ background: "#754ef9", margin: "5px", color: "#fdfdfd", fontSize: "10px" }}
                                 >
                                     Add User
                                 </Button>
@@ -159,7 +160,7 @@ export const UsersListMini = () => {
                                     component={Link}
                                     size="small"
                                     to={"/users"}
-                                    style={{ background: "transparent", margin: "5px", color: "white", fontSize: "10px" }}
+                                    style={{ background: "var(--bg2)", margin: "5px", color: "var(--textColor)", fontSize: "10px" }}
                                 >
                                     See All
                                 </Button>

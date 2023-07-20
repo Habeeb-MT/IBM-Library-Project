@@ -1,0 +1,35 @@
+*{
+    margin: 0;
+    padding: 0;
+  }
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  :root{
+    --mainColor:#754ef9;
+    --whiteColor:#fdfdfd;
+    --bg1:#0b061f;
+    --bg2: #1f1a34;
+    --textColor:#fdfdfd;
+  }
+  
+  
+  .dark-mode {
+    --mainColor:#754ef9;
+    --whiteColor:#fdfdfd;
+    --bg1:#0b061f;
+    --bg2: #1f1a34;
+    --textColor:#fdfdfd;
+  }
+  
+  .light-mode {
+    --mainColor:#754ef9;
+    --whiteColor:#fdfdfd;
+    --bg1:#fdfdfd;
+    --bg2: #d5d2df;
+    --textColor: #333;
+  }
+  

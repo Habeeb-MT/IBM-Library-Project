@@ -6,6 +6,7 @@ import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../Contexts/UserContext";
 import { PiBooks } from "react-icons/pi";
+import { DarkLightContext } from "../Contexts/DarkLightContext";
 
 export const SideNavbar = () => {
     const { isAdmin } = useContext(UserContext)
@@ -16,16 +17,12 @@ export const SideNavbar = () => {
         navigate("/")
     }
 
-    const [darkMode, setDarkMode] = useState(false);
-
-    const toggleMode = () => {
-        setDarkMode(!darkMode);
-    };
+    const { darkMode, toggleMode } = useContext(DarkLightContext);
 
     const { actUser } = useContext(UserContext)
 
     return (
-        <div className="sidenavbar">
+        <div className={`sidenavbar ${darkMode ? "dark-mode" : "light-mode"}`}>
             <div className="features">
                 <div className="icon">
                     <TbHome onClick={() => navigate("/")} />
@@ -43,7 +40,10 @@ export const SideNavbar = () => {
                 </div>}
             </div>
             <div className="settings">
-                <div className="icon" onClick={toggleMode}>
+                <div className="icon" onClick={() => {
+                    toggleMode();
+                    console.log(darkMode)
+                }}>
                     {darkMode ? <MdOutlineLightMode /> : <MdOutlineDarkMode />}
                 </div>
                 <div className="icon">

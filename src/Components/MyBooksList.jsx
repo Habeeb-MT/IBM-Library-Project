@@ -105,21 +105,21 @@ export const MyBooksList = () => {
             {booksList.length >= 1 && myBooks.length >= 1 ? (
                 <>
                     <div className='table' style={{ padding: "20px" }}>
-                        <TableContainer component={Paper} style={{ background: "#434141" }} >
+                        <TableContainer component={Paper} style={{ background: "var(--bg1)" }} >
 
                             <Table sx={{ minWidth: 650 }} aria-label="simple table">
                                 <TableHead className='tablehead'>
                                     <TableRow>
-                                        <TableCell style={{ fontSize: "16px", color: "white" }} align="center">SI</TableCell>
-                                        <TableCell style={{ fontSize: "16px", color: "white" }} align="center">Book-ID</TableCell>
-                                        <TableCell style={{ fontSize: "16px", color: "white" }} align="center">Title</TableCell>
-                                        <TableCell style={{ fontSize: "16px", color: "white" }} align="center">Author</TableCell>
-                                        <TableCell style={{ fontSize: "16px", color: "white" }} align="center">Category</TableCell>
-                                        <TableCell style={{ fontSize: "16px", color: "white" }} align="center">Publisher</TableCell>
-                                        <TableCell style={{ fontSize: "16px", color: "white" }} align="center">Available</TableCell>
-                                        <TableCell style={{ fontSize: "16px", color: "white" }} align="center">Price</TableCell>
-                                        <TableCell style={{ fontSize: "16px", color: "white" }} align="center">Due Date</TableCell>
-                                        <TableCell style={{ fontSize: "16px", color: "white" }} align="center">Action</TableCell>
+                                        <TableCell style={{ fontSize: "16px", color: "var(--textColor)" }} align="center">SI</TableCell>
+                                        <TableCell style={{ fontSize: "16px", color: "var(--textColor)" }} align="center">Book-ID</TableCell>
+                                        <TableCell style={{ fontSize: "16px", color: "var(--textColor)" }} align="center">Title</TableCell>
+                                        <TableCell style={{ fontSize: "16px", color: "var(--textColor)" }} align="center">Author</TableCell>
+                                        <TableCell style={{ fontSize: "16px", color: "var(--textColor)" }} align="center">Category</TableCell>
+                                        <TableCell style={{ fontSize: "16px", color: "var(--textColor)" }} align="center">Publisher</TableCell>
+                                        <TableCell style={{ fontSize: "16px", color: "var(--textColor)" }} align="center">Available</TableCell>
+                                        <TableCell style={{ fontSize: "16px", color: "var(--textColor)" }} align="center">Price</TableCell>
+                                        <TableCell style={{ fontSize: "16px", color: "var(--textColor)" }} align="center">Due Date</TableCell>
+                                        <TableCell style={{ fontSize: "16px", color: "var(--textColor)" }} align="center">Action</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -136,17 +136,17 @@ export const MyBooksList = () => {
                                                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                                 >
                                                     {/* Render the table cells for the book details */}
-                                                    <TableCell style={{ fontSize: "13px", color: "white" }} align="center">{index + 1}</TableCell>
-                                                    <TableCell style={{ fontSize: "13px", color: "white" }} align="center">{book?.bid}</TableCell>
-                                                    <TableCell component="th" scope="row" style={{ fontSize: "13px", color: "white" }} align="center">
+                                                    <TableCell style={{ fontSize: "13px", color: "var(--textColor)" }} align="center">{index + 1}</TableCell>
+                                                    <TableCell style={{ fontSize: "13px", color: "var(--textColor)" }} align="center">{book?.bid}</TableCell>
+                                                    <TableCell component="th" scope="row" style={{ fontSize: "13px", color: "var(--textColor)" }} align="center">
                                                         {book?.title}
                                                     </TableCell>
-                                                    <TableCell style={{ fontSize: "13px", color: "white" }} align="center">{book?.author}</TableCell>
-                                                    <TableCell style={{ fontSize: "13px", color: "white" }} align="center">{book?.category}</TableCell>
-                                                    <TableCell style={{ fontSize: "13px", color: "white" }} align="center">{book?.publisher}</TableCell>
-                                                    <TableCell style={{ fontSize: "13px", color: "white" }} align="center">{book?.available}</TableCell>
-                                                    <TableCell style={{ fontSize: "13px", color: "white" }} align="center">&#8377;{book?.price}</TableCell>
-                                                    <TableCell style={{ fontSize: "13px", color: "white" }} align="center">{book?.due}</TableCell>
+                                                    <TableCell style={{ fontSize: "13px", color: "var(--textColor)" }} align="center">{book?.author}</TableCell>
+                                                    <TableCell style={{ fontSize: "13px", color: "var(--textColor)" }} align="center">{book?.category}</TableCell>
+                                                    <TableCell style={{ fontSize: "13px", color: "var(--textColor)" }} align="center">{book?.publisher}</TableCell>
+                                                    <TableCell style={{ fontSize: "13px", color: "var(--textColor)" }} align="center">{book?.available}</TableCell>
+                                                    <TableCell style={{ fontSize: "13px", color: "var(--textColor)" }} align="center">&#8377;{book?.price}</TableCell>
+                                                    <TableCell style={{ fontSize: "13px", color: "var(--textColor)" }} align="center">{book?.due}</TableCell>
                                                     <TableCell align="center">
                                                         <Button
                                                             variant="contained"
@@ -192,7 +192,7 @@ export const MyBooksList = () => {
                             rowsPerPage={rowPerPage}
                             page={page}
                             onPageChange={(e, newPage) => setPage(newPage)}
-                            style={{ color: "white" }}
+                            style={{ color: "var(--textColor)" }}
                         />
 
                     </div>

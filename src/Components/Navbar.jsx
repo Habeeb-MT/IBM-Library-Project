@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { UserContext } from '../Contexts/UserContext'
 import { MdSearch } from "react-icons/md";
+import Logo from "../Images/LogoLibrary.png"
 
 export const Navbar = () => {
 
@@ -11,8 +12,11 @@ export const Navbar = () => {
   return (
     <div className='navbar'>
       <div className="logo">
-        <span className='brand'>LOGO</span>
-        <span>DASHBOARD</span>
+        <div className='brand'>
+          <img src={Logo} alt="" />
+          <span>WISDOM LIBRARY</span>
+        </div>
+        <div className='pageName'>DASHBOARD</div>
       </div>
 
       <div className="searchbar">

@@ -25,7 +25,7 @@ export const UsersList = () => {
     return (
         <div>
             <div className="heading" style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                <Typography variant='h5' style={{ textAlign: "center", margin: "20px 40px" }}>Users Lists</Typography>
+                <Typography variant='h5' style={{ textAlign: "center", margin: "20px 40px", color: "var(--textColor)" }}>Users Lists</Typography>
                 {isAdmin ? (
                     <Typography style={{ textAlign: "center", margin: "20px 40px" }}>
                         <AddUserForm />
@@ -35,20 +35,22 @@ export const UsersList = () => {
             {filteredUsers.length >= 1 ? (
                 <>
                     <div className='table' style={{ padding: "20px" }}>
-                        <TableContainer component={Paper} style={{ background: "#434141" }} >
+                        <TableContainer component={Paper} style={{ background: "var(--bg1)" }} >
 
-                            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                            <Table aria-label="simple table">
                                 <TableHead className='tablehead'>
                                     <TableRow>
-                                        <TableCell style={{ fontSize: "16px", color: "white" }} align="center">SI</TableCell>
-                                        <TableCell style={{ fontSize: "16px", color: "white" }} align="left">Name</TableCell>
-                                        <TableCell style={{ fontSize: "16px", color: "white" }} align="center">ID</TableCell>
-                                        <TableCell style={{ fontSize: "16px", color: "white" }} align="center">email</TableCell>
-                                        <TableCell style={{ fontSize: "16px", color: "white" }} align="center">Phone</TableCell>
-                                        <TableCell style={{ fontSize: "16px", color: "white" }} align="center">College</TableCell>
-                                        <TableCell style={{ fontSize: "16px", color: "white" }} align="center">Year</TableCell>
-                                        <TableCell style={{ fontSize: "16px", color: "white" }} align="center">Issued</TableCell>
-                                        <TableCell style={{ fontSize: "16px", color: "white" }} align="center">Action</TableCell>
+                                        <TableCell style={{ fontSize: "16px", color: "var(--textColor)" }} align="center">SI</TableCell>
+                                        <TableCell style={{ fontSize: "16px", color: "var(--textColor)" }} align="left">Name</TableCell>
+                                        <TableCell className='mobile' style={{ fontSize: "16px", color: "var(--textColor)" }} align="center">ID</TableCell>
+                                        <TableCell className='mobile' style={{ fontSize: "16px", color: "var(--textColor)" }} align="center">email</TableCell>
+                                        <TableCell className='tablet' style={{ fontSize: "16px", color: "var(--textColor)" }} align="center">Phone</TableCell>
+                                        {window.innerWidth >= 1050 && <>
+                                            <TableCell style={{ fontSize: "16px", color: "var(--textColor)" }} align="center">College</TableCell>
+                                            <TableCell style={{ fontSize: "16px", color: "var(--textColor)" }} align="center">Year</TableCell>
+                                        </>}
+                                        <TableCell className='minitablet' style={{ fontSize: "16px", color: "var(--textColor)" }} align="center">Issued</TableCell>
+                                        <TableCell style={{ fontSize: "16px", color: "var(--textColor)" }} align="center">Action</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -60,18 +62,20 @@ export const UsersList = () => {
                                             key={user?.lid}
                                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                         >
-                                            <TableCell style={{ fontSize: "12px", color: "white" }} align='center'>{index + 1}</TableCell>
-                                            <TableCell component="th" scope="row" align='center' style={{ fontSize: "12px", color: "white" }}>
+                                            <TableCell style={{ fontSize: "12px", color: "var(--textColor)" }} align='center'>{index + 1}</TableCell>
+                                            <TableCell component="th" scope="row" align='center' style={{ fontSize: "12px", color: "var(--textColor)" }}>
                                                 {<div className='user'>
                                                     <img src={user.photoURL} alt="" />
                                                     <span>{user.displayName}</span></div>}
                                             </TableCell>
-                                            <TableCell style={{ fontSize: "12px", color: "white" }} align="center">{user.lid}</TableCell>
-                                            <TableCell style={{ fontSize: "12px", color: "white" }} align="center">{user.email}</TableCell>
-                                            <TableCell style={{ fontSize: "12px", color: "white" }} align="center">{user.phone}</TableCell>
-                                            <TableCell style={{ fontSize: "12px", color: "white" }} align="center">{user.college}</TableCell>
-                                            <TableCell style={{ fontSize: "12px", color: "white" }} align="center">{user.year}</TableCell>
-                                            <TableCell style={{ fontSize: "12px", color: "white" }} align="center">{user.issued}</TableCell>
+                                            <TableCell className='mobile' style={{ fontSize: "12px", color: "var(--textColor)" }} align="center">{user.lid}</TableCell>
+                                            <TableCell className='mobile' style={{ fontSize: "12px", color: "var(--textColor)" }} align="center">{user.email}</TableCell>
+                                            <TableCell className='tablet' style={{ fontSize: "12px", color: "var(--textColor)" }} align="center">{user.phone}</TableCell>
+                                            {window.innerWidth >= 1050 && <>
+                                                <TableCell style={{ fontSize: "12px", color: "var(--textColor)" }} align="center">{user.college}</TableCell>
+                                                <TableCell style={{ fontSize: "12px", color: "var(--textColor)" }} align="center">{user.year}</TableCell>
+                                            </>}
+                                            <TableCell className='minitablet' style={{ fontSize: "12px", color: "var(--textColor)" }} align="center">{user.issued}</TableCell>
                                             <TableCell align="center">
                                                 <Button
                                                     variant="contained"
@@ -82,13 +86,15 @@ export const UsersList = () => {
                                                 >View</Button>
                                                 {isAdmin && <>
                                                     <Button
+                                                        className='rmbtn'
                                                         variant="contained"
                                                         component={Link}
                                                         size="small"
-                                                        style={{ background: "#2a9942", margin: "1px", fontSize: "10px" }}
+                                                        style={{ background: "#754ef9", margin: "1px", fontSize: "10px" }}
                                                     // state={book}
                                                     >Edit</Button>
                                                     <Button
+                                                        className='rmbtn'
                                                         variant="contained"
                                                         component={Link}
                                                         size="small"
@@ -105,6 +111,7 @@ export const UsersList = () => {
                             </Table>
                         </TableContainer>
                         <TablePagination
+                            className='tpg'
                             onRowsPerPageChange={(e) => {
                                 setRowsPerPage(parseInt(e.target.value, 10));
                                 setPage(0);
@@ -114,7 +121,7 @@ export const UsersList = () => {
                             rowsPerPage={rowPerPage}
                             page={page}
                             onPageChange={(e, newPage) => setPage(newPage)}
-                            style={{ color: "white" }}
+                            style={{ color: "var(--textColor)" }}
                         />
 
                     </div>

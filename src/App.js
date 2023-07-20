@@ -1,4 +1,4 @@
-import './App.css';
+import './App.scss';
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom"
 import { Login } from './Pages/LogReg/Login';
 import { Register } from "./Pages/LogReg/Register"
@@ -8,6 +8,7 @@ import { UserContext } from './Contexts/UserContext';
 import { BooksTable } from './Pages/BooksTable';
 import { UsersTable } from './Pages/UsersTable';
 import { MyBooksTable } from './Pages/MyBooksTable';
+import { DarkLightContext } from './Contexts/DarkLightContext';
 
 
 
@@ -24,9 +25,12 @@ function App() {
     return children;
   }
 
+  const { darkMode } = useContext(DarkLightContext)
+
+
 
   return (
-    <div className="App">
+    <div className={`App ${darkMode ? "dark-mode" : "light-mode"}`}>
       <Router>
         <Routes>
           <Route path='/' element={<ProtectedRoute> <Home /></ProtectedRoute>} />

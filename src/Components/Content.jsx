@@ -2,7 +2,9 @@ import React, { useContext, useState, useEffect } from 'react'
 import { UserContext } from '../Contexts/UserContext'
 import { UsersListMini } from './UsersListMini'
 import { BooksListMini } from './BooksListMini'
-
+import { FaUsers } from 'react-icons/fa'
+import { FaBookOpen } from "react-icons/fa";
+import { FaBookDead } from 'react-icons/fa'
 export const Content = () => {
 
   const { currUser } = useContext(UserContext)
@@ -28,13 +30,31 @@ export const Content = () => {
         <h5>{formattedDateTime}</h5>
       </div>
       <div className="middlesection">
-        <div className="stats">Total Users</div>
-        <div className="stats">Borrowed Books</div>
-        <div className="stats">Overdue Books</div>
+        <div className="stats">
+          <div className="flexicon">
+            <h2>125</h2>
+            <div className="icon"><FaUsers /></div>
+          </div>
+          <p>Total Users</p>
+        </div>
+        <div className="stats">
+          <div className="flexicon">
+            <h2>225</h2>
+            <div className="icon"><FaBookOpen /></div>
+          </div>
+          <p>Borrowed Books</p>
+        </div>
+        <div className="stats">
+          <div className="flexicon">
+            <h2>73</h2>
+            <div className="icon"><FaBookDead /></div>
+          </div>
+          <p>Overdue Books</p>
+        </div>
       </div>
       <div className="bottomsection">
-        {isAdmin && <div className="table"><UsersListMini /></div>}
-        <div className="table"><BooksListMini /></div>
+        {isAdmin && <div className="table userTable"><UsersListMini /></div>}
+        <div className="table bookTable"><BooksListMini /></div>
       </div>
     </div>
   )
