@@ -10,8 +10,8 @@ import { doc, setDoc } from 'firebase/firestore'
 import { MdOutlineLightMode } from "react-icons/md";
 import { MdOutlineDarkMode } from "react-icons/md";
 import { DarkLightContext } from '../../Contexts/DarkLightContext'
-
-
+import logo from "../../Images/LogoLibrary.png"
+import { BiImageAdd } from "react-icons/bi";
 
 export const Register = () => {
     const { darkMode, toggleMode } = useContext(DarkLightContext)
@@ -84,7 +84,10 @@ export const Register = () => {
             <div className="formContainer">
                 <div className="formWrapper">
                     {/* <img src={logo} alt="" /> */}
-                    <span className="logo">BookHive</span>
+                    <span className="logo">
+                        <img src={logo} alt="" />
+                        <span>Wisom Library</span>
+                    </span>
                     <span className="reg">Register</span>
                     <form onSubmit={handleSubmit} className='logregform'>
                         <input type="text" placeholder="Username..." />
@@ -92,7 +95,7 @@ export const Register = () => {
                         <input type="password" placeholder="password..." />
                         <input type="file" id="file" style={{ display: 'none' }} />
                         <label htmlFor="file">
-                            <img src={AddAvatar} alt="" />
+                            <BiImageAdd style={{ fontSize: "20px" }} />
                             <span>Add Profile Pic</span>
                         </label>
                         <button>sign up</button>

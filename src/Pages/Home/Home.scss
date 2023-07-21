@@ -131,21 +131,18 @@
                     flex-direction: column;
                     justify-content: right;
 
-                    .role{
-                        font-size: 10px;
-                        color: rgb(209, 194, 194);
-                    }
                     .name{
                         font-size: 18px;
                         font-weight: bold;
                         color: var(--mainColor);
                     }
+                    .role{
+                        font-size: 12px;
+                        color: var(--textColor);
+                    }
                     span{
                         margin-right: 10px;
-                    }
-                    .role{
-                        font-size: 14px;
-                        color: var(--textColor);
+                        
                     }
 
                     @include minitablet{

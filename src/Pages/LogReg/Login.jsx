@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import "./LogReg.scss"
-// import logo from "../images/icons8-whatsapp-48.png"
+import logo from "../../Images/LogoLibrary.png"
 import { auth } from '../../firebase/firebase'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { MdOutlineLightMode } from "react-icons/md";
@@ -41,7 +41,10 @@ export const Login = () => {
             <div className="formContainer">
                 <div className="formWrapper">
                     {/* <img src={logo} alt="" /> */}
-                    <span className="logo">BookHive</span>
+                    <span className="logo">
+                        <img src={logo} alt="" />
+                        <span>Wisom Library</span>
+                    </span>
                     <span className="reg">Login</span>
                     <form onSubmit={handleSubmit} >
                         <input type="email" placeholder="email..." />
