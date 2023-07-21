@@ -1,0 +1,12 @@
+.MuiDialog-container{
+    .MuiDialog-paper{
+      background-color: var(--bg2);
+      color: var(--textColor);
+
+      input,textarea{
+        background-color: var(--bg1);
+        color: var(--textColor);
+      }
+    }
+  }
+  

@@ -10,8 +10,8 @@ import { Button } from "@mui/material";
 import { UserContext } from "../Contexts/UserContext";
 import { arrayUnion, doc, updateDoc, getDoc, arrayRemove } from "firebase/firestore";
 import { db } from "../firebase/firebase";
-
-import photo from "../Images/IMG-20220503-WA0030.jpg";
+import "../css/mui.scss"
+import { DarkLightContext } from "../Contexts/DarkLightContext";
 
 export const ViewBook = ({ openView, handleCloseView }) => {
     const theme = useTheme();
@@ -19,7 +19,7 @@ export const ViewBook = ({ openView, handleCloseView }) => {
     const { isAdmin } = useContext(UserContext);
     const { actUser } = useContext(UserContext);
     const [isBorrowed, setIsBorrowed] = useState(false);
-
+    const { darkMode } = useContext(DarkLightContext)
     const location = useLocation();
     const [book, setBook] = useState({});
     useEffect(() => {
@@ -77,8 +77,9 @@ export const ViewBook = ({ openView, handleCloseView }) => {
     };
 
     return (
-        <div>
+        <div >
             <Dialog
+                className={`${darkMode ? "dark-mode" : "light-mode"}`}
                 fullScreen={fullScreen}
                 open={openView}
                 onClose={handleCloseView}
@@ -91,7 +92,7 @@ export const ViewBook = ({ openView, handleCloseView }) => {
                 <DialogContent style={{ minHeight: "300px" }}>
                     <div className="bookContainer">
                         <div className="bookHead">
-                            <img src={photo} alt="" />
+                            <img src={book?.downloadURL} alt="" />
                             <div className="bookTitle">
                                 <h2>{book?.title}</h2>
                                 <h3>{book?.author}</h3>
@@ -101,13 +102,7 @@ export const ViewBook = ({ openView, handleCloseView }) => {
                             </div>
                         </div>
                         <div className="bookInfo">
-                            {/* <p>{book?.description}</p> */}
-                            <p>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus
-                                expedita consectetur, explicabo consequatur amet maxime modi
-                                ipsa asperiores, eum voluptatum laborum atque neque deleniti
-                                distinctio.
-                            </p>
+                            <p>{book?.descript}</p>
                             <span>Price : &#8377;{book?.price}</span>
                         </div>
                     </div>

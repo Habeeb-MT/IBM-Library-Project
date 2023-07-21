@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useContext } from 'react';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -11,12 +11,14 @@ import { Button } from '@mui/material';
 import { doc, updateDoc } from 'firebase/firestore';
 import { db } from '../firebase/firebase';
 import { useState } from 'react';
+import { DarkLightContext } from '../Contexts/DarkLightContext';
 
 
 export const EditBookForm = ({ openEdit, handleCloseEdit, data }) => {
 
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
+    const { darkMode } = useContext(DarkLightContext)
 
     const [ti, setTi] = useState("")
     const [aut, setAut] = useState("")
@@ -49,6 +51,7 @@ export const EditBookForm = ({ openEdit, handleCloseEdit, data }) => {
     return (
         <div>
             <Dialog
+                className={`${darkMode ? "dark-mode" : "light-mode"}`}
                 fullScreen={fullScreen}
                 open={openEdit}
                 onClose={handleCloseEdit}

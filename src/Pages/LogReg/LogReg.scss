@@ -1,3 +1,33 @@
+@mixin mobile {
+    @media screen  and (max-width:541px){
+        @content;
+    }
+}
+@mixin minitablet {
+    @media screen  and (max-width:621px){
+        @content;
+    }
+}
+@mixin tablet {
+    @media screen  and (max-width:768px){
+        @content;
+    }
+}
+
+@mixin minilaptop {
+    @media screen  and (max-width:1090px){
+        @content;
+    }
+}
+
+@mixin laptop {
+    @media screen  and (min-width:1090px){
+        @content;
+    }
+}
+
+
+
 .fullContainerlogreg{
     display: flex;
     background-color: var(--bg1);
@@ -8,6 +38,9 @@
     .icon{
         position: absolute;
         top: 0;right: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         border: 2px solid var(--mainColor);
         border-radius: 50%;
         padding: 10px;
@@ -65,9 +98,14 @@
                     background: transparent;
                     font-size: 15px ;
                     color: var(--textColor);
+
+                    @include mobile{
+                        width: 150px;
+                    }
                 }
     
                 button{
+                    width: 100%;
                     background-color: var(--mainColor);
                     color: white;
                     padding: 10px;

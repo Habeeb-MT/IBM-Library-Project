@@ -17,13 +17,19 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import { UserContext } from '../Contexts/UserContext';
 import { addDoc, collection } from 'firebase/firestore';
-import { db } from '../firebase/firebase';
+import { db, storage } from '../firebase/firebase';
+import { RiImageAddFill } from "react-icons/ri";
+import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
+import { DarkLightContext } from '../Contexts/DarkLightContext';
+import "../css/mui.scss"
 
 export const AddBookForm = ({ open, handleClose }) => {
 
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
     const bookListCollectionRef = collection(db, "Books")
+    const [err, setErr] = useState(false)
+    const { darkMode } = useContext(DarkLightContext)
 
     const [title, setTitle] = useState("")
     const [author, setAuthor] = useState("")
@@ -35,19 +41,45 @@ export const AddBookForm = ({ open, handleClose }) => {
     const [bid, setBid] = useState("")
     const [price, setPrice] = useState("")
     const [descript, setDescrit] = useState("")
+    const [pic, setPic] = useState(null);
 
     const handleSubmit = async (e) => {
         if (title === "" || author === "" || category === "" || publisher === "" || isbn === 0 || copies === 0 || bid === "" || price === 0) {
-            // Handle the validation error, e.g., show an error message
             return;
         }
 
-        const obj = { title, author, category, publisher, isbn, copies, available, bid, price };
-        const createBook = async () => {
-            await addDoc(bookListCollectionRef, obj)
+        try {
+
+
+            const storageRef = ref(storage, `coverpages/${bid}`);
+
+            const uploadTask = uploadBytesResumable(storageRef, pic);
+
+
+            uploadTask.on('state_changed', null,
+                (error) => {
+                    console.log(error)
+                    setErr(error)
+                },
+                async () => {
+                    const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+
+                    const obj = { title, author, category, publisher, isbn, copies, available, bid, price, descript, downloadURL };
+                    const createBook = async () => {
+                        await addDoc(bookListCollectionRef, obj)
+                    }
+                    createBook()
+                    handleClose()
+                }
+            );
+
+
+        } catch (error) {
+            setErr(error)
+            console.log(error)
         }
-        createBook()
-        handleClose()
+
+
 
     }
 
@@ -55,6 +87,7 @@ export const AddBookForm = ({ open, handleClose }) => {
         <div>
             <Dialog
                 // fullScreen={fullScreen}
+                className={`${darkMode ? "dark-mode" : "light-mode"}`}
                 open={open}
                 onClose={handleClose}
                 aria-labelledby="responsive-dialog-title"
@@ -79,7 +112,11 @@ export const AddBookForm = ({ open, handleClose }) => {
                             </div>
                         </div>
                         <textarea cols="30" rows="10" placeholder='description...' onChange={e => setDescrit(e.target.value)}></textarea>
-
+                        <input type="file" id="file" style={{ display: 'none' }} onChange={e => setPic(e.target.files[0])} />
+                        <label htmlFor="file">
+                            <RiImageAddFill />
+                            <span>Add Cover Page</span>
+                        </label>
                     </form>
                 </DialogContent>
                 <DialogActions>

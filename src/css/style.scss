@@ -36,14 +36,16 @@ form{
 
     input {
         padding: 10px;
-        border: 1px solid #ccc;
         border-radius: 4px;
         font-size: 14px;
         width: 300px;
+        border: 1px solid var(--bg1);
         
         &:focus {
           outline: none;
           border-color: var(--mainColor);
+          border: 1px solid #ccc;
+
         }
       }
 
@@ -64,7 +66,7 @@ form{
         display: flex;
         align-items: center;
         gap: 10px;
-        font-size: 12px;
+        font-size: 14px;
         color: var(--mainColor);
         cursor: pointer;
 
@@ -381,3 +383,4 @@ form{
         
     }
 }
+
