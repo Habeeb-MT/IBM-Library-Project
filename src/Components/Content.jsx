@@ -56,7 +56,7 @@ export const Content = () => {
       <div className="bottomsection">
         {isAdmin && <div className="table userTable"><UsersListMini /></div>}
         <div className="table bookTable"><BooksListMini /></div>
-        {!isAdmin && <div className="table bookTable"><MyBooksListMini /></div>}
+        {!isAdmin && <div className="table mybookTable"><MyBooksListMini /></div>}
       </div>
     </div>
   )

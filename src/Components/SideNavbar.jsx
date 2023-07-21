@@ -42,7 +42,6 @@ export const SideNavbar = () => {
             <div className="settings">
                 <div className="icon" onClick={() => {
                     toggleMode();
-                    console.log(darkMode)
                 }}>
                     {darkMode ? <MdOutlineLightMode /> : <MdOutlineDarkMode />}
                 </div>

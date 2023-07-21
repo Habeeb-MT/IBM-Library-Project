@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import "./LogReg.scss"
 // import logo from "../images/icons8-whatsapp-48.png"
@@ -6,8 +6,11 @@ import { auth } from '../../firebase/firebase'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { MdOutlineLightMode } from "react-icons/md";
 import { MdOutlineDarkMode } from "react-icons/md";
+import { DarkLightContext } from '../../Contexts/DarkLightContext'
 
 export const Login = () => {
+
+    const { darkMode, toggleMode } = useContext(DarkLightContext)
 
     const navigate = useNavigate()
     const [err, setErr] = useState(null)
@@ -29,8 +32,12 @@ export const Login = () => {
 
     return (
 
-        <div className="fullContainer">
-            <div className="icon"><MdOutlineDarkMode /></div>
+        <div className={`fullContainerlogreg ${darkMode ? "dark-mode" : "light-mode"}`}>
+            <div className="icon" onClick={() => {
+                toggleMode();
+            }}>
+                {darkMode ? <MdOutlineLightMode /> : <MdOutlineDarkMode />}
+            </div>
             <div className="formContainer">
                 <div className="formWrapper">
                     {/* <img src={logo} alt="" /> */}

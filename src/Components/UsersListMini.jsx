@@ -150,7 +150,9 @@ export const UsersListMini = () => {
                                     component={Link}
                                     size="small"
                                     onClick={handleClickOpen}
-                                    style={{ background: "#754ef9", margin: "5px", color: "#fdfdfd", fontSize: "10px" }}
+                                    style={{
+                                        background: "var(--mainColor)", margin: "5px", color: "var(--whiteColor)", fontSize: "10px"
+                                    }}
                                 >
                                     Add User
                                 </Button>
