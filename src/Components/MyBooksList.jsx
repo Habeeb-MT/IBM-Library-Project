@@ -100,13 +100,12 @@ export const MyBooksList = () => {
     return (
         <div>
             <div className="heading" style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                <Typography variant='h5' style={{ textAlign: "center", margin: "20px 40px" }}>Borrowed Books</Typography>
+                <Typography variant='h5' style={{ textAlign: "center", margin: "20px 40px", color: "var(--textColor)" }}>Borrowed Books</Typography>
             </div>
             {booksList.length >= 1 && myBooks.length >= 1 ? (
                 <>
                     <div className='table' style={{ padding: "20px" }}>
                         <TableContainer component={Paper} style={{ background: "var(--bg1)" }} >
-
                             <Table sx={{ minWidth: 650 }} aria-label="simple table">
                                 <TableHead className='tablehead'>
                                     <TableRow>
@@ -123,11 +122,9 @@ export const MyBooksList = () => {
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {(rowPerPage > 0
-                                        ? booksList.slice(page * rowPerPage, page * rowPerPage + rowPerPage)
-                                        : booksList
-                                    ).map((book, index) => {
-                                        const isBorrowed = myBooks.includes(book?.bid);
+                                    {myBooks.map((bookId, index) => {
+                                        const book = booksList.find((item) => item?.bid === bookId);
+                                        const isBorrowed = Boolean(book);
 
                                         if (isBorrowed) {
                                             return (
@@ -200,7 +197,7 @@ export const MyBooksList = () => {
 
                 </>
             ) : (
-                <Typography variant='h5'> No Borrowed Books!</Typography>
+                <Typography variant='h5' style={{ textAlign: "center", color: "var(--textColor)" }}>No Borrowed Books!</Typography>
             )
             }
         </div>

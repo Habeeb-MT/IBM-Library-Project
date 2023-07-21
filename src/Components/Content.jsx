@@ -5,6 +5,7 @@ import { BooksListMini } from './BooksListMini'
 import { FaUsers } from 'react-icons/fa'
 import { FaBookOpen } from "react-icons/fa";
 import { FaBookDead } from 'react-icons/fa'
+import { MyBooksListMini } from './MyBooksListMini'
 export const Content = () => {
 
   const { currUser } = useContext(UserContext)
@@ -55,6 +56,7 @@ export const Content = () => {
       <div className="bottomsection">
         {isAdmin && <div className="table userTable"><UsersListMini /></div>}
         <div className="table bookTable"><BooksListMini /></div>
+        {!isAdmin && <div className="table bookTable"><MyBooksListMini /></div>}
       </div>
     </div>
   )

@@ -129,7 +129,7 @@ export const UsersList = () => {
 
                 </>
             ) : (
-                <Typography variant='h5'> No Books found!</Typography>
+                <Typography variant='h5' style={{ textAlign: "center", color: "var(--textColor)" }}>No Users Found!</Typography>
             )
             }
         </div>
