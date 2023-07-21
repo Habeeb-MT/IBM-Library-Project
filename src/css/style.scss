@@ -370,7 +370,7 @@ form{
         img{
             height: 200px;
             width: 250px;
-            object-fit: cover;
+            object-fit: contain;
             margin-right: 20px;
         }
     }

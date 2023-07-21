@@ -99,7 +99,6 @@ export const BooksList = () => {
                 <>
                     <div className='table' style={{ padding: "20px" }}>
                         <TableContainer component={Paper} style={{ background: "var(--bg1)" }} >
-
                             <Table aria-label="simple table">
                                 <TableHead className='tablehead'>
                                     <TableRow>

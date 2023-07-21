@@ -106,18 +106,17 @@ export const MyBooksList = () => {
                 <>
                     <div className='table' style={{ padding: "20px" }}>
                         <TableContainer component={Paper} style={{ background: "var(--bg1)" }} >
-                            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                            <Table aria-label="simple table">
                                 <TableHead className='tablehead'>
                                     <TableRow>
                                         <TableCell style={{ fontSize: "16px", color: "var(--textColor)" }} align="center">SI</TableCell>
-                                        <TableCell style={{ fontSize: "16px", color: "var(--textColor)" }} align="center">Book-ID</TableCell>
+                                        <TableCell className='tablet' style={{ fontSize: "16px", color: "var(--textColor)" }} align="center">Book-ID</TableCell>
                                         <TableCell style={{ fontSize: "16px", color: "var(--textColor)" }} align="center">Title</TableCell>
-                                        <TableCell style={{ fontSize: "16px", color: "var(--textColor)" }} align="center">Author</TableCell>
-                                        <TableCell style={{ fontSize: "16px", color: "var(--textColor)" }} align="center">Category</TableCell>
-                                        <TableCell style={{ fontSize: "16px", color: "var(--textColor)" }} align="center">Publisher</TableCell>
-                                        <TableCell style={{ fontSize: "16px", color: "var(--textColor)" }} align="center">Available</TableCell>
-                                        <TableCell style={{ fontSize: "16px", color: "var(--textColor)" }} align="center">Price</TableCell>
-                                        <TableCell style={{ fontSize: "16px", color: "var(--textColor)" }} align="center">Due Date</TableCell>
+                                        <TableCell className='minitablet' style={{ fontSize: "16px", color: "var(--textColor)" }} align="center">Author</TableCell>
+                                        <TableCell className='tablet' style={{ fontSize: "16px", color: "var(--textColor)" }} align="center">Category</TableCell>
+                                        <TableCell className='minilaptop' style={{ fontSize: "16px", color: "var(--textColor)" }} align="center">Publisher</TableCell>
+                                        <TableCell className='minilaptop' style={{ fontSize: "16px", color: "var(--textColor)" }} align="center">Price</TableCell>
+                                        <TableCell className='mobile' style={{ fontSize: "16px", color: "var(--textColor)" }} align="center">Due Date</TableCell>
                                         <TableCell style={{ fontSize: "16px", color: "var(--textColor)" }} align="center">Action</TableCell>
                                     </TableRow>
                                 </TableHead>
@@ -134,16 +133,15 @@ export const MyBooksList = () => {
                                                 >
                                                     {/* Render the table cells for the book details */}
                                                     <TableCell style={{ fontSize: "13px", color: "var(--textColor)" }} align="center">{index + 1}</TableCell>
-                                                    <TableCell style={{ fontSize: "13px", color: "var(--textColor)" }} align="center">{book?.bid}</TableCell>
+                                                    <TableCell className='tablet' style={{ fontSize: "13px", color: "var(--textColor)" }} align="center">{book?.bid}</TableCell>
                                                     <TableCell component="th" scope="row" style={{ fontSize: "13px", color: "var(--textColor)" }} align="center">
                                                         {book?.title}
                                                     </TableCell>
-                                                    <TableCell style={{ fontSize: "13px", color: "var(--textColor)" }} align="center">{book?.author}</TableCell>
-                                                    <TableCell style={{ fontSize: "13px", color: "var(--textColor)" }} align="center">{book?.category}</TableCell>
-                                                    <TableCell style={{ fontSize: "13px", color: "var(--textColor)" }} align="center">{book?.publisher}</TableCell>
-                                                    <TableCell style={{ fontSize: "13px", color: "var(--textColor)" }} align="center">{book?.available}</TableCell>
-                                                    <TableCell style={{ fontSize: "13px", color: "var(--textColor)" }} align="center">&#8377;{book?.price}</TableCell>
-                                                    <TableCell style={{ fontSize: "13px", color: "var(--textColor)" }} align="center">{book?.due}</TableCell>
+                                                    <TableCell className='minitablet' style={{ fontSize: "13px", color: "var(--textColor)" }} align="center">{book?.author}</TableCell>
+                                                    <TableCell className='tablet' style={{ fontSize: "13px", color: "var(--textColor)" }} align="center">{book?.category}</TableCell>
+                                                    <TableCell className='minilaptop' style={{ fontSize: "13px", color: "var(--textColor)" }} align="center">{book?.publisher}</TableCell>
+                                                    <TableCell className='minilaptop' style={{ fontSize: "13px", color: "var(--textColor)" }} align="center">&#8377;{book?.price}</TableCell>
+                                                    <TableCell className='mobile' style={{ fontSize: "13px", color: "var(--textColor)" }} align="center">{book?.due}</TableCell>
                                                     <TableCell align="center">
                                                         <Button
                                                             variant="contained"
@@ -158,13 +156,14 @@ export const MyBooksList = () => {
                                                             View
                                                         </Button>
                                                         <Button
+                                                            className='rmbtn'
                                                             variant="contained"
                                                             component={Link}
                                                             size="small"
                                                             onClick={() => {
                                                                 handleReturn(book);
                                                             }}
-                                                            style={{ background: "#2a9942", margin: "1px", fontSize: "10px" }}
+                                                            style={{ background: "red", margin: "1px", fontSize: "10px" }}
                                                         >
                                                             Return
                                                         </Button>
