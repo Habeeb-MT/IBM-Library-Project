@@ -74,6 +74,8 @@ export const UserContextProvider = ({ children }) => {
         setIsAdmin(actUser && actUser.role === "admin")
     }, [actUser])
 
+
+
     return (
         <UserContext.Provider value={{ currUser, isAdmin, actUser, usersList }}>
             {children}

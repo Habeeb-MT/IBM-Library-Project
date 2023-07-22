@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import AddAvatar from "../../Images/addAvatar.png"
 import "./LogReg.scss"
@@ -12,13 +12,35 @@ import { MdOutlineDarkMode } from "react-icons/md";
 import { DarkLightContext } from '../../Contexts/DarkLightContext'
 import logo from "../../Images/LogoLibrary.png"
 import { BiImageAdd } from "react-icons/bi";
+import { UserContext } from '../../Contexts/UserContext'
 
 export const Register = () => {
     const { darkMode, toggleMode } = useContext(DarkLightContext)
-
     const navigate = useNavigate()
 
     const [err, setErr] = useState(null)
+    const [luid, setLuid] = useState(0);
+
+    const [openEdit, setOpenEdit] = useState(false);
+    const handleCloseEdit = () => {
+        setOpenEdit(false);
+    };
+
+    const { usersList } = useContext(UserContext)
+
+    useEffect(() => {
+        const getLid = () => {
+            let max = -99999;
+            usersList.map((user, key) => {
+                if (user.lid)
+                    max = (Math.max(user.lid, max));
+            });
+            setLuid(max + 1);
+        };
+
+        getLid(); // Call the function after its definition.
+
+    }, [usersList]); // Include usersList in the dependency array to update luid when usersList changes.
 
 
     const handleSubmit = async (e) => {
@@ -58,12 +80,16 @@ export const Register = () => {
                         email,
                         photoURL: downloadURL,
                         role: "student",
+                        password: password,
+                        lid: luid,
                     })
                     await setDoc(doc(db, "BorrowedBooks", userId), {
                         borrowed: []
                     })
 
-                    navigate('/')
+                    setOpenEdit(true)
+                    navigate('/', { state: { openEdit: true } });
+
                 }
             );
 
