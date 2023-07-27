@@ -16,7 +16,7 @@ export const UsersList = () => {
     const { isAdmin } = useContext(UserContext);
 
     const { usersList } = useContext(UserContext);
-    const [rowPerPage, setRowsPerPage] = useState(10);
+    const [rowPerPage, setRowsPerPage] = useState(7);
     const [page, setPage] = useState(0);
 
     // Filter out admin users from the list
@@ -111,13 +111,13 @@ export const UsersList = () => {
                             </Table>
                         </TableContainer>
                         <TablePagination
-                            className='tpg'
                             onRowsPerPageChange={(e) => {
-                                setRowsPerPage(parseInt(e.target.value, 10));
+                                setRowsPerPage(parseInt(e.target.value, 7));
                                 setPage(0);
                             }}
+                            rowsPerPageOptions={[7]}
                             component="div"
-                            count={filteredUsers.length}
+                            count={usersList.length}
                             rowsPerPage={rowPerPage}
                             page={page}
                             onPageChange={(e, newPage) => setPage(newPage)}

@@ -20,7 +20,7 @@ import { ViewBook } from './ViewBook';
 export const MyBooksList = () => {
 
     const { booksList } = useContext(BooksContext);
-    const [rowPerPage, setRowsPerPage] = useState(10)
+    const [rowPerPage, setRowsPerPage] = useState(7)
     const [page, setPage] = useState(0)
     const { isAdmin } = useContext(UserContext)
     const [isBorrowed, setIsBorrowed] = useState(false);
@@ -180,9 +180,10 @@ export const MyBooksList = () => {
                         </TableContainer>
                         <TablePagination
                             onRowsPerPageChange={(e) => {
-                                setRowsPerPage(parseInt(e.target.value, 10))
-                                setPage(0)
+                                setRowsPerPage(parseInt(e.target.value, 7));
+                                setPage(0);
                             }}
+                            rowsPerPageOptions={[7]}
                             component="div"
                             count={booksList.length}
                             rowsPerPage={rowPerPage}
