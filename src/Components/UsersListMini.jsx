@@ -23,11 +23,18 @@ import { DarkLightContext } from '../Contexts/DarkLightContext';
 export const AddUserForm = ({ open, handleClose }) => {
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
-
+    const { darkMode } = useContext(DarkLightContext)
     return (
         <div>
-            <Dialog maxWidth="md" fullScreen={fullScreen} open={open} onClose={handleClose} aria-labelledby="responsive-dialog-title">
-                <DialogTitle style={{ color: "#754ef9" }} id="responsive-dialog-title" >Add User</DialogTitle>
+            <Dialog
+                maxWidth="md"
+                fullScreen={fullScreen}
+                open={open} onClose={handleClose}
+                aria-labelledby="responsive-dialog-title"
+                className={`${darkMode ? "dark-mode" : "light-mode"}`}
+            >
+
+                <DialogTitle style={{ color: "#754ef9", margin: "0px auto" }} id="responsive-dialog-title" >Add User</DialogTitle>
                 <DialogContent style={{ minHeight: "300px" }}>
                     <form className="form">
                         <input type="text" placeholder="Name..." />

@@ -11,6 +11,8 @@ import { Typography, TablePagination, Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { AddUserForm } from './UsersListMini';
+import { ViewProfile } from './ViewProfile';
+import { ViewUser } from './ViewUser';
 
 export const UsersList = () => {
     const { isAdmin } = useContext(UserContext);
@@ -21,6 +23,12 @@ export const UsersList = () => {
 
     // Filter out admin users from the list
     const filteredUsers = usersList.filter((user) => user.role !== "admin");
+
+    const [openView, setOpenView] = useState(false)
+    const handleCloseView = () => {
+        setOpenView(false);
+    };
+
 
     return (
         <div>
@@ -82,7 +90,10 @@ export const UsersList = () => {
                                                     component={Link}
                                                     size="small"
                                                     style={{ background: "#2a9942", margin: "1px", fontSize: "10px" }}
-                                                // state={book}
+                                                    onClick={() => {
+                                                        setOpenView(true)
+                                                    }}
+                                                    state={user}
                                                 >View</Button>
                                                 {isAdmin && <>
                                                     <Button
@@ -103,6 +114,7 @@ export const UsersList = () => {
                                                     // state={book}
                                                     >Delete</Button>
                                                 </>}
+                                                <ViewUser openView={openView} handleCloseView={handleCloseView} />
                                             </TableCell>
                                         </TableRow>
                                     ))

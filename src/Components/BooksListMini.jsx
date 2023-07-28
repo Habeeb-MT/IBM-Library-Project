@@ -86,13 +86,13 @@ export const AddBookForm = ({ open, handleClose }) => {
     return (
         <div>
             <Dialog
-                // fullScreen={fullScreen}
+                fullScreen={fullScreen}
                 className={`${darkMode ? "dark-mode" : "light-mode"}`}
                 open={open}
                 onClose={handleClose}
                 aria-labelledby="responsive-dialog-title"
             >
-                <DialogTitle id="responsive-dialog-title" style={{ color: "#754ef9" }}>
+                <DialogTitle id="responsive-dialog-title" style={{ color: "#754ef9", margin: "0px auto" }}>
                     {"Add Book"}
                 </DialogTitle>
                 <DialogContent style={{ minHeight: "300px" }}>
@@ -106,12 +106,15 @@ export const AddBookForm = ({ open, handleClose }) => {
                             </div>
                             <div className="col">
                                 <input type="text" placeholder="ISBN..." onChange={e => setIsbn(e.target.value)} />
-                                <input type="number" placeholder="Copies..." onChange={e => setCopies(e.target.value)} />
+                                <input type="number" placeholder="Copies..." onChange={e => {
+                                    setCopies(e.target.value)
+                                    setAvai(e.target.value)
+                                }} />
                                 <input type="text" placeholder="Book-ID..." onChange={e => setBid(e.target.value)} />
                                 <input type="number" placeholder="Price..." onChange={e => setPrice(e.target.value)} />
                             </div>
                         </div>
-                        <textarea cols="30" rows="10" placeholder='description...' onChange={e => setDescrit(e.target.value)}></textarea>
+                        <textarea cols="30" rows="10" placeholder='Description...' onChange={e => setDescrit(e.target.value)}></textarea>
                         <input type="file" id="file" style={{ display: 'none' }} onChange={e => setPic(e.target.files[0])} />
                         <label htmlFor="file">
                             <RiImageAddFill />

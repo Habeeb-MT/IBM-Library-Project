@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { UserContext } from "../Contexts/UserContext";
 import { PiBooks } from "react-icons/pi";
 import { DarkLightContext } from "../Contexts/DarkLightContext";
+import { ViewProfile } from "./ViewProfile";
 
 export const SideNavbar = () => {
     const { isAdmin } = useContext(UserContext)
@@ -16,6 +17,11 @@ export const SideNavbar = () => {
         signOut(auth)
         navigate("/")
     }
+
+    const [openView, setOpenView] = useState(false)
+    const handleCloseView = () => {
+        setOpenView(false);
+    };
 
     const { darkMode, toggleMode } = useContext(DarkLightContext);
 
@@ -45,9 +51,10 @@ export const SideNavbar = () => {
                 }}>
                     {darkMode ? <MdOutlineLightMode /> : <MdOutlineDarkMode />}
                 </div>
-                <div className="icon">
+                <div className="icon" onClick={() => setOpenView(true)}>
                     <TbSettings />
                 </div>
+                <ViewProfile openView={openView} handleCloseView={handleCloseView} />
                 <div className="icon">
                     <TbLogout onClick={handleSignOut} />
                 </div>

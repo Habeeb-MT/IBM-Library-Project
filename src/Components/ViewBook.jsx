@@ -8,7 +8,7 @@ import { useTheme } from "@mui/material/styles";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@mui/material";
 import { UserContext } from "../Contexts/UserContext";
-import { arrayUnion, doc, updateDoc, getDoc, arrayRemove } from "firebase/firestore";
+import { arrayUnion, doc, updateDoc, getDoc, arrayRemove, increment } from "firebase/firestore";
 import { db } from "../firebase/firebase";
 import "../css/mui.scss"
 import { DarkLightContext } from "../Contexts/DarkLightContext";
@@ -54,8 +54,21 @@ export const ViewBook = ({ openView, handleCloseView }) => {
             await updateDoc(borrowedBooksRef, {
                 borrowed: arrayUnion(book?.bid),
             });
-            setIsBorrowed(true);
-            handleCloseView();
+
+            const bookRef = doc(db, "Books", book.id);
+            const bookDoc = await getDoc(bookRef);
+            if (bookDoc.exists()) {
+                const bookData = bookDoc.data();
+                const currentAvailable = bookData.available || 0;
+                const newAvailable = Math.max(0, currentAvailable - 1);
+
+                await updateDoc(bookRef, {
+                    available: newAvailable,
+                });
+
+                setIsBorrowed(true);
+                handleCloseView();
+            }
         } catch (error) {
             console.error("Error borrowing book:", error);
         }
@@ -68,13 +81,25 @@ export const ViewBook = ({ openView, handleCloseView }) => {
                 borrowed: arrayRemove(book?.bid),
             });
 
-            setIsBorrowed(false); // Update the isBorrowed state to reflect the book is returned
-            handleCloseView(); // Close the dialog immediately
+            const bookRef = doc(db, "Books", book.id);
+            const bookDoc = await getDoc(bookRef);
+            if (bookDoc.exists()) {
+                const bookData = bookDoc.data();
+                const currentAvailable = bookData.available || 0;
+                const newAvailable = currentAvailable + 1;
 
+                await updateDoc(bookRef, {
+                    available: newAvailable,
+                });
+
+                setIsBorrowed(false);
+                handleCloseView();
+            }
         } catch (error) {
             console.error("Error returning book:", error);
         }
     };
+
 
     return (
         <div >
@@ -95,10 +120,10 @@ export const ViewBook = ({ openView, handleCloseView }) => {
                             <img src={book?.downloadURL} alt="" />
                             <div className="bookTitle">
                                 <h2>{book?.title}</h2>
-                                <h3>{book?.author}</h3>
-                                <span>Publisher : {book?.publisher}</span>
-                                <span>Category : {book?.category}</span>
-                                <span>ISBN : {book?.isbn}</span>
+                                <span><pre>Author        :   {book?.author}</pre></span>
+                                <span><pre>Publisher    :   {book?.publisher}</pre></span>
+                                <span><pre>Category    :   {book?.category}</pre></span>
+                                <span><pre>ISBN          :   {book?.isbn}</pre></span>
                             </div>
                         </div>
                         <div className="bookInfo">

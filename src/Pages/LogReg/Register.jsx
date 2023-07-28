@@ -19,7 +19,7 @@ export const Register = () => {
     const navigate = useNavigate()
 
     const [err, setErr] = useState(null)
-    const [luid, setLuid] = useState(0);
+    // const [luid, setLuid] = useState(0);
 
     const [openEdit, setOpenEdit] = useState(false);
     const handleCloseEdit = () => {
@@ -28,19 +28,32 @@ export const Register = () => {
 
     const { usersList } = useContext(UserContext)
 
-    useEffect(() => {
-        const getLid = () => {
-            let max = -99999;
-            usersList.map((user, key) => {
-                if (user.lid)
-                    max = (Math.max(user.lid, max));
-            });
-            setLuid(max + 1);
-        };
+    const findNextUniqueLid = (usersList) => {
+        let maxLid = -Infinity;
 
-        getLid(); // Call the function after its definition.
+        usersList.forEach((user) => {
+            if (user.lid) {
+                maxLid = Math.max(user.lid, maxLid);
+            }
+        });
 
-    }, [usersList]); // Include usersList in the dependency array to update luid when usersList changes.
+        return maxLid + 1;
+    };
+
+
+    // useEffect(() => {
+    //     const getLid = () => {
+    //         let max = -99999;
+    //         usersList.map((user, key) => {
+    //             if (user.lid)
+    //                 max = (Math.max(user.lid, max));
+    //         });
+    //         setLuid(max + 1);
+    //     };
+
+    //     getLid(); // Call the function after its definition.
+
+    // }, [usersList]); // Include usersList in the dependency array to update luid when usersList changes.
 
 
     const handleSubmit = async (e) => {
@@ -50,6 +63,8 @@ export const Register = () => {
         const email = e.target[1].value;
         const password = e.target[2].value;
         const pic = e.target[3].files[0];
+
+        const luid = findNextUniqueLid(usersList);
 
         try {
 
@@ -82,6 +97,9 @@ export const Register = () => {
                         role: "student",
                         password: password,
                         lid: luid,
+                        phone: "",
+                        college: "",
+                        year: "",
                     })
                     await setDoc(doc(db, "BorrowedBooks", userId), {
                         borrowed: []
