@@ -10,6 +10,9 @@ export const Content = () => {
 
   const { currUser } = useContext(UserContext)
 
+  const { usersList } = useContext(UserContext)
+  const filteredUsers = usersList.filter((user) => user.role !== "admin")
+
   const [currentDateTime, setCurrentDateTime] = useState(new Date());
   useEffect(() => {
     const interval = setInterval(() => {
@@ -33,7 +36,7 @@ export const Content = () => {
       <div className="middlesection">
         <div className="stats">
           <div className="flexicon">
-            <h2>125</h2>
+            <h2>{filteredUsers.length}</h2>
             <div className="icon"><FaUsers /></div>
           </div>
           <p>Total Users</p>

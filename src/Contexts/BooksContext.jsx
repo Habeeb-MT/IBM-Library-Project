@@ -38,7 +38,6 @@ export const BooksContextProvider = ({ children }) => {
             });
 
             return () => {
-                // Unsubscribe from the real-time updates when the component unmounts
                 unsubscribe();
             };
         } catch (error) {
